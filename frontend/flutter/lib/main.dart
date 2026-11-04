@@ -16,7 +16,9 @@ class FigmaEduPathApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: buildEduPathTheme(),
       initialRoute: initialRoute,
-      routes: appRoutes,
+      routes: routes,
+      onUnknownRoute: (settings) =>
+          MaterialPageRoute(builder: (_) => const DebugRouteMenu()),
     );
   }
 }
