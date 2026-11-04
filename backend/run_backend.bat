@@ -1,24 +1,27 @@
 @echo off
+setlocal
 chcp 65001 > nul
+
 echo ======================================================================
-echo    🚀 KHỞI ĐỘNG HỆ THỐNG EDUPATH BACKEND (FASTAPI + SQLALCHEMY 2.0)
-echo    📌 Nền tảng học tập thông minh EduPath (FastAPI Engine)
+echo    STARTING EDUPATH BACKEND (FastAPI + SQLAlchemy 2.0)
+echo    EduPath Smart Learning Platform
 echo ======================================================================
 echo.
-echo [*] Đang kiểm tra môi trường Python...
+echo [*] Checking Python environment...
 python --version > nul 2>&1
-if %errorlevel% neq 0 (
-    echo [!] Lỗi: Không tìm thấy Python trên máy tính. Vui lòng cài đặt Python 3.10 trở lên.
+if errorlevel 1 (
+    echo [!] Error: Python not found. Please install Python 3.10+
     pause
     exit /b
 )
 
-echo [*] Đang cài đặt thư viện cần thiết...
+echo [*] Installing dependencies if needed...
 pip install -r requirements.txt > nul 2>&1
 
-echo [*] Đang khởi chạy Uvicorn Server tại http://127.0.0.1:8000 ...
-echo [i] Mở trình duyệt xem tài liệu Swagger: http://127.0.0.1:8000/docs
+echo [*] Starting Uvicorn Server at http://127.0.0.1:8000 ...
+echo [i] Interactive Swagger Docs: http://127.0.0.1:8000/docs
 echo.
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
-pause
 
+endlocal
+pause

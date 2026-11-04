@@ -62,6 +62,7 @@ UX_UI/ (final/figmatoCode)
 ## ⚡ Hướng Dẫn Khởi Chạy Nhanh
 
 ### 1. Khởi chạy Backend FastAPI (SQLite Auto-Seed)
+
 ```bash
 cd backend
 
@@ -72,15 +73,19 @@ run_backend.bat
 pip install -r requirements.txt
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
+
 * **API Server:** `http://127.0.0.1:8000`
 * **Swagger UI Tương tác:** `http://127.0.0.1:8000/docs`
 * **ReDoc:** `http://127.0.0.1:8000/redoc`
 
 ### 2. Mở Trình Mô Phỏng Prototype (Web Simulator)
+
 Mở trực tiếp file sau bằng trình duyệt (Chrome / Edge / Firefox):
+
 ```text
 frontend/web_viewer/index.html
 ```
+
 * Khung điện thoại mô phỏng chính xác kích thước và viền **iPhone 13 Pro Max** (tai thỏ Dynamic Notch, bo góc squircle $R=50\text{px}$, thanh iOS Home Indicator).
 * Hỗ trợ chạm trực tiếp vào nút bấm trên màn hình điện thoại hoặc chọn theo kịch bản luồng chạy.
 
@@ -89,11 +94,13 @@ frontend/web_viewer/index.html
 ## 🧪 Kết Quả Kiểm Thử Tự Động (Automated Testing)
 
 Chạy lệnh kiểm thử toàn diện:
+
 ```bash
 python backend/tests/test_api.py
 ```
 
 **Kết quả:**
+
 ```text
 ============================================================
 BẮT ĐẦU CHẠY KIỂM THỬ TOÀN DIỆN EDUPATH BACKEND
