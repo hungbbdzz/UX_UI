@@ -36,11 +36,12 @@
       max-width: 390px !important;
       height: 760px !important;
     }
-    /* Viewport điện thoại chuẩn 390px tuyệt đối */
+    /* Viewport điện thoại chuẩn 390px tuyệt đối có Safe Area padding-top cho tai thỏ */
     #phone-screen-viewport {
       width: 390px !important;
       min-width: 390px !important;
       max-width: 390px !important;
+      padding-top: 38px !important;
       scrollbar-width: none !important;
       -ms-overflow-style: none !important;
     }
@@ -223,20 +224,35 @@
         <div class="absolute -right-[2px] bottom-[68px] w-[2px] h-[3px] bg-[#12151d] pointer-events-none"></div>
 
         <!-- Phone Screen Inside Viewport Frame (EXACTLY 390px WIDE x 760px HIGH) -->
-        <div id="phone-screen-frame" class="relative w-[390px] h-[760px] bg-white rounded-[42px] overflow-hidden flex flex-col select-none ring-1 ring-black/40 shadow-inner">
+        <div id="phone-screen-frame" class="relative w-[390px] h-[760px] bg-[#F9F9FF] rounded-[42px] overflow-hidden flex flex-col select-none ring-1 ring-black/40 shadow-inner">
           
-          <!-- IPHONE 13 PRO COMPACT NOTCH (20% Smaller - Exact Apple Proportion) -->
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[124px] h-[23px] bg-[#000000] rounded-b-[15px] z-50 flex items-center justify-center gap-2.5 px-3 pointer-events-none select-none shadow-sm">
-            <!-- Micro Speaker Grill -->
-            <div class="w-10 h-[3px] bg-[#1a1f2c] rounded-full"></div>
-            <!-- Front Camera & Face ID Sensor -->
-            <div class="w-2.5 h-2.5 bg-[#090b10] rounded-full ring-1 ring-[#1b202c] flex items-center justify-center">
-              <div class="w-1 h-1 bg-[#1e3a8a]/70 rounded-full"></div>
+          <!-- IPHONE 13 PRO / 14 STATUS BAR (Time 9:41, Notch, Cellular, Wifi & Battery) -->
+          <div class="absolute top-0 left-0 w-[390px] h-[36px] z-50 flex items-center justify-between px-6 pointer-events-none select-none">
+            <!-- Left: Time 9:41 -->
+            <span class="text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1">9:41</span>
+
+            <!-- Center: Apple Notch -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[124px] h-[23px] bg-[#000000] rounded-b-[15px] flex items-center justify-center gap-2.5 px-3 shadow-sm pointer-events-auto">
+              <!-- Micro Speaker Grill -->
+              <div class="w-10 h-[3px] bg-[#1a1f2c] rounded-full"></div>
+              <!-- Front Camera & Face ID Sensor -->
+              <div class="w-2.5 h-2.5 bg-[#090b10] rounded-full ring-1 ring-[#1b202c] flex items-center justify-center">
+                <div class="w-1 h-1 bg-[#1e3a8a]/70 rounded-full"></div>
+              </div>
+            </div>
+
+            <!-- Right: Status Icons (Cellular, Wifi, Battery) -->
+            <div class="flex items-center gap-1.5 text-slate-800 pr-1">
+              <span class="material-symbols-outlined text-[13px] leading-none">signal_cellular_4_bar</span>
+              <span class="material-symbols-outlined text-[13px] leading-none">wifi</span>
+              <div class="w-4 h-2 border border-slate-700/80 rounded-[2px] p-[0.5px] flex items-center">
+                <div class="w-2.5 h-full bg-slate-800 rounded-[0.5px]"></div>
+              </div>
             </div>
           </div>
 
           <!-- Scrollable Screen Content (Takes remaining height above pinned nav) -->
-          <div id="phone-screen-viewport" class="relative w-[390px] flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col select-none">
+          <div id="phone-screen-viewport" class="relative w-[390px] flex-1 min-h-0 pt-[38px] overflow-y-auto overflow-x-hidden flex flex-col select-none">
             <!-- Rendered content (Image + Hotspots Layer) -->
             <div id="screen-render-target" class="w-[390px] relative">
               <!-- Rendered by JS -->
@@ -964,10 +980,10 @@
         pointer.style.top = realY + 'px';
         
         // Kích hoạt ripple gợn sóng ngay tâm nút
-        const viewport = document.getElementById('phone-screen-viewport');
-        const vRect = viewport.getBoundingClientRect();
-        const screenX = vRect.left + realX;
-        const screenY = vRect.top + (realY - viewport.scrollTop);
+        const renderTarget = document.getElementById('screen-render-target');
+        const rRect = renderTarget.getBoundingClientRect();
+        const screenX = rRect.left + realX;
+        const screenY = rRect.top + realY;
         showTapRipple(screenX, screenY);
 
         setTimeout(() => {
