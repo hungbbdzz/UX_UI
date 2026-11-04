@@ -70,3 +70,4 @@ class FocusSession(Base):
     session_minutes = Column(Integer, default=25)  # Pomodoro
     completed = Column(Boolean, default=True)
     completed_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+

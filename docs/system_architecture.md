@@ -1,9 +1,7 @@
 # Kiến Trúc Hệ Thống EduPath (System Architecture)
 
 > **Dự án:** EduPath - Nền tảng học tập thông minh (AI Learning Experience Platform)  
-> **Môn học:** Thiết kế UX/UI (1)_TA - Trường ĐH CNTT & TT Việt - Hàn (VKU)  
-> **Giảng viên hướng dẫn:** ThS. Lý Quỳnh Trân  
-> **Nhóm sinh viên:** Nhóm Rise (Nguyễn Văn Hùng - `23IT.B069`, Nguyễn Gia Minh - `23IT.B132`)
+> **Kiến trúc:** Monorepo đa tầng (Frontend Flutter / React Native & Backend FastAPI)
 
 ---
 
@@ -73,3 +71,4 @@ flowchart TD
 * **Màn hình:** `S45` – `S48`
 * **Mô tả:** Lịch học nhóm theo tuần có giảng viên dẫn dắt, danh sách khóa học đang theo học, theo dõi % hoàn thành, bài kiểm tra tốt nghiệp trắc nghiệm cuối khóa và cấp chứng chỉ số có mã xác minh duy nhất.
 * **API Router:** `/api/v1/my-courses`
+

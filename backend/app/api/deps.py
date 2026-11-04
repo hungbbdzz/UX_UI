@@ -20,8 +20,8 @@ def get_current_user(
 ) -> User:
     """
     Xác thực người dùng qua JWT Token.
-    Nếu không truyền header token (để tiện cho Giảng viên test nhanh qua Swagger / cURL),
-    hệ thống tự động sử dụng tài khoản học viên mặc định (Nguyễn Văn Hùng - 23IT.B069).
+    Nếu không truyền header token (để tiện test nhanh qua Swagger / cURL),
+    hệ thống tự động sử dụng tài khoản học viên mặc định.
     """
     if not token:
         # Fallback tài khoản test mặc định
@@ -52,3 +52,4 @@ def get_current_user(
             detail="Người dùng không tồn tại."
         )
     return user
+

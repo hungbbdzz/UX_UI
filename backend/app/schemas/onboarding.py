@@ -70,3 +70,4 @@ class SaveOnboardingPreferencesRequest(BaseModel):
     interest_codes: List[str]
     current_level: str  # Beginner, Intermediate, Advanced
     daily_study_minutes: int
+

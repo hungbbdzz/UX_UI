@@ -76,3 +76,4 @@ class UserSettings(Base):
     reduce_motion = Column(Boolean, default=False)
 
     user = relationship("User", back_populates="settings")
+

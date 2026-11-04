@@ -285,7 +285,7 @@ def get_course_detail(
         "id": ins.id if ins else 1,
         "name": ins.name if ins else "Ms. Lan",
         "title": ins.title if ins else "Giảng viên",
-        "organization": ins.organization if ins else "VKU",
+        "organization": ins.organization if ins else "EduPath Academy",
         "avatar_url": ins.avatar_url if ins else "",
         "bio": ins.bio if ins else "",
         "total_students": ins.total_students if ins else 1000,
@@ -457,3 +457,4 @@ def get_lesson_preview(lesson_id: int, db: Session = Depends(get_db)):
         "slide_url": lesson.slide_url,
         "is_preview": True
     }
+

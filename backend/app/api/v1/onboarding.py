@@ -141,3 +141,4 @@ def save_onboarding_preferences(
 
     db.commit()
     return {"message": "Đã lưu cài đặt lộ trình thành công!", "user_id": current_user.id}
+

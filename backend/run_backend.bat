@@ -2,8 +2,7 @@
 chcp 65001 > nul
 echo ======================================================================
 echo    🚀 KHỞI ĐỘNG HỆ THỐNG EDUPATH BACKEND (FASTAPI + SQLALCHEMY 2.0)
-echo    📌 Đồ án UX/UI - Nhóm Rise (VKU - ĐH Đà Nẵng)
-echo    📌 Giảng viên hướng dẫn: ThS. Lý Quỳnh Trân
+echo    📌 Nền tảng học tập thông minh EduPath (FastAPI Engine)
 echo ======================================================================
 echo.
 echo [*] Đang kiểm tra môi trường Python...
@@ -22,3 +21,4 @@ echo [i] Mở trình duyệt xem tài liệu Swagger: http://127.0.0.1:8000/docs
 echo.
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 pause
+

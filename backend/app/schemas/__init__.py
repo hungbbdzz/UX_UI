@@ -62,3 +62,4 @@ from app.schemas.cohort_exam import (
     CertificateDTO,
     NextCourseRecommendationDTO
 )
+

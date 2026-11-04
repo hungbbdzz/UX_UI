@@ -45,3 +45,4 @@ __all__ = [
     "FinalQuizQuestion",
     "Certificate",
 ]
+

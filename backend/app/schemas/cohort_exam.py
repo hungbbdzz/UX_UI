@@ -89,3 +89,4 @@ class NextCourseRecommendationDTO(BaseModel):
     thumbnail_url: str
     reason: str
     match_percentage: int
+

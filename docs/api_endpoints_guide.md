@@ -1,8 +1,6 @@
 # Hướng Dẫn Sử Dụng API Endpoints (API Specification)
 
-> **Môn học:** Thiết kế UX/UI (1)_TA - Trường ĐH CNTT & TT Việt - Hàn (VKU)  
-> **Giảng viên hướng dẫn:** ThS. Lý Quỳnh Trân  
-> **Nhóm thực hiện:** Nhóm Rise (Nguyễn Văn Hùng & Nguyễn Gia Minh)  
+> **Dự án:** EduPath Platform - RESTful API Specification  
 > **Máy chủ Local:** `http://127.0.0.1:8000`  
 > **Swagger UI:** `http://127.0.0.1:8000/docs`
 
@@ -102,3 +100,4 @@
 | `POST` | `/api/v1/my-courses/{id}/final-quiz/submit`| **S47** | Nộp bài thi cuối khóa, chấm điểm tự động |
 | `GET` | `/api/v1/my-courses/{id}/certificate`| **S47** | Xem và tải chứng chỉ số tốt nghiệp chính thức |
 | `GET` | `/api/v1/my-courses/{id}/next-recommendations`| **S48** | Gợi ý các khóa học chuyên sâu tiếp theo sau khi tốt nghiệp |
+

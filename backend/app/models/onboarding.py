@@ -65,3 +65,4 @@ class UserOnboardingState(Base):
     placement_score = Column(Integer, default=0)
     placement_rank = Column(String(50), default="B1 - Intermediate")
     suggested_path_id = Column(Integer, ForeignKey("suggested_paths.id"), nullable=True)
+

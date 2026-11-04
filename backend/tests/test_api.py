@@ -24,13 +24,13 @@ def run_all_tests():
         assert response.status_code == 200
         data = response.json()
         assert data["project"] == "EduPath - AI Learning Experience Platform"
-        assert data["instructor"] == "ThS. Lý Quỳnh Trân"
+        assert data["status"] == "ONLINE"
         print("✅ [Pass] Test Root & Health Check")
 
         # 2. Auth (A01, A02)
         login_res = client.post("/api/v1/auth/login", json={
             "email": "hung.nv@edupath.vn",
-            "password": "RiseEduPath2026!"
+            "password": "EduPath2026!"
         })
         assert login_res.status_code == 200, f"Login failed: {login_res.text}"
         token = login_res.json()["access_token"]

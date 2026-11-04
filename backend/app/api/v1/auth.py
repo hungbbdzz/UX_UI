@@ -109,3 +109,4 @@ def get_current_user_profile(current_user: User = Depends(get_current_user)):
         streak_count=prof.streak_count if prof else 0,
         created_at=current_user.created_at
     )
+

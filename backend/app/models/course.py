@@ -30,7 +30,7 @@ class Instructor(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(150), nullable=False)  # "Ms. Lan", "Dr. Anh Tuan"
     title = Column(String(150), default="Senior UI/UX & Data Specialist")
-    organization = Column(String(150), default="VKU Academy & TechHub")
+    organization = Column(String(150), default="Tech Academy & Innovation Hub")
     avatar_url = Column(String(500), default="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200")
     bio = Column(Text, default="Hơn 8 năm kinh nghiệm giảng dạy và dẫn dắt các dự án công nghệ lớn.")
     total_students = Column(Integer, default=14200)
@@ -122,3 +122,4 @@ class CourseReview(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     course = relationship("Course", back_populates="reviews")
+

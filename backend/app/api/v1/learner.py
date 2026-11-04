@@ -383,3 +383,4 @@ def update_user_settings(
         
     db.commit()
     return {"message": "Cập nhật cài đặt thành công!"}
+

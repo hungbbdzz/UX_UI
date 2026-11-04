@@ -120,3 +120,4 @@ class CourseDetailDTO(BaseModel):
 class CourseComparisonDTO(BaseModel):
     courses: List[CourseDetailDTO]
     comparison_points: List[dict]
+

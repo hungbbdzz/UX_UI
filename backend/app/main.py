@@ -3,12 +3,7 @@
 =============================================================================
 EDUPATH BACKEND API ENGINE (FASTAPI + SQLALCHEMY 2.0 + SQLITE)
 =============================================================================
-Đồ án môn học: Thiết kế UX/UI (1)_TA - Trường ĐH CNTT & TT Việt - Hàn (VKU)
-Giảng viên hướng dẫn: ThS. Lý Quỳnh Trân (lqtran@vku.udn.vn)
-Nhóm thực hiện: Nhóm Rise
-Thành viên phụ trách Phần A & B:
-  1. Nguyễn Văn Hùng - 23IT.B069 (Phần A: S01–S24 + A01, A02)
-  2. Nguyễn Gia Minh - 23IT.B132 (Phần B: S25–S48)
+Production-grade RESTful API service for EduPath learning ecosystem.
 =============================================================================
 """
 
@@ -38,8 +33,7 @@ init_db()
 async def lifespan(app: FastAPI):
     """Quản lý vòng đời ứng dụng khi chạy qua Uvicorn"""
     print("=" * 70)
-    print("🚀 KHỞI ĐỘNG HỆ THỐNG EDUPATH BACKEND (NHÓM RISE - VKU)")
-    print(f"📌 Giảng viên hướng dẫn: ThS. Lý Quỳnh Trân")
+    print("🚀 KHỞI ĐỘNG HỆ THỐNG EDUPATH BACKEND")
     print(f"📌 Phiên bản API: {settings.VERSION}")
     print("=" * 70)
     init_db()
@@ -72,16 +66,9 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 
 @app.get("/", tags=["Hệ thống"])
 def root_status():
-    """Thông tin tổng quan hệ thống và đồ án môn học"""
+    """Thông tin tổng quan hệ thống EduPath API"""
     return {
         "project": "EduPath - AI Learning Experience Platform",
-        "institution": "Trường ĐH Công nghệ Thông tin & Truyền thông Việt - Hàn (VKU)",
-        "instructor": "ThS. Lý Quỳnh Trân",
-        "group": "Nhóm Rise",
-        "members": {
-            "Part A (S01–S24)": "Nguyễn Văn Hùng (23IT.B069)",
-            "Part B (S25–S48)": "Nguyễn Gia Minh (23IT.B132)"
-        },
         "status": "ONLINE",
         "swagger_docs": "/docs",
         "version": settings.VERSION

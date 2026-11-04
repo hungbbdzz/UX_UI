@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-EduPath Backend - Seed Data Nạp dữ liệu mẫu bám sát 100% Figma Designs
-Phục vụ môn Thiết kế UX/UI - Nhóm Rise (VKU)
-Giảng viên hướng dẫn: ThS. Lý Quỳnh Trân
+EduPath Backend - Seed Data Nạp dữ liệu mẫu ban đầu
 """
 
 from datetime import date, datetime, timedelta, timezone
@@ -57,11 +55,11 @@ def seed_database(db: Session):
     print("[*] Đang khởi tạo và nạp dữ liệu mẫu cho EduPath Backend...")
 
     # 1. TẠO TÀI KHOẢN NGƯỜI DÙNG & PROFILE
-    # Học viên 1: Nguyễn Văn Hùng (23IT.B069)
+    # Học viên 1
     hung_user = User(
         email="hung.nv@edupath.vn",
         full_name="Nguyễn Văn Hùng",
-        hashed_password=get_password_hash("RiseEduPath2026!"),
+        hashed_password=get_password_hash("EduPath2026!"),
         role="learner",
         is_active=True
     )
@@ -71,7 +69,7 @@ def seed_database(db: Session):
     hung_profile = LearnerProfile(
         user_id=hung_user.id,
         avatar_url="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200",
-        bio="Học viên CNTT Khóa 23IT - Đam mê UX/UI Design & Lập trình ứng dụng",
+        bio="Học viên đam mê UX/UI Design & Lập trình ứng dụng",
         phone="0905123456",
         current_level="Intermediate",
         daily_study_minutes=30,
@@ -98,11 +96,11 @@ def seed_database(db: Session):
     )
     db.add(hung_settings)
 
-    # Học viên 2: Nguyễn Gia Minh (23IT.B132)
+    # Học viên 2
     minh_user = User(
         email="minh.ng@edupath.vn",
         full_name="Nguyễn Gia Minh",
-        hashed_password=get_password_hash("RiseEduPath2026!"),
+        hashed_password=get_password_hash("EduPath2026!"),
         role="learner",
         is_active=True
     )
@@ -112,7 +110,7 @@ def seed_database(db: Session):
     minh_profile = LearnerProfile(
         user_id=minh_user.id,
         avatar_url="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=200",
-        bio="Thành viên Nhóm Rise - Phụ trách Phần B Khám phá & Đa phương tiện",
+        bio="Thành viên EduPath - Khám phá khóa học & Đa phương tiện",
         current_level="Intermediate",
         daily_study_minutes=45,
         xp=1100,
@@ -127,15 +125,15 @@ def seed_database(db: Session):
     db.add(minh_profile)
     db.add(UserSettings(user_id=minh_user.id))
 
-    # Giảng viên hướng dẫn: ThS. Lý Quỳnh Trân
-    tran_user = User(
-        email="lqtran@vku.udn.vn",
-        full_name="ThS. Lý Quỳnh Trân",
-        hashed_password=get_password_hash("VkuTeacher2026!"),
+    # Giảng viên
+    instructor_user = User(
+        email="instructor@edupath.vn",
+        full_name="Dr. Minh Tran",
+        hashed_password=get_password_hash("EduPath2026!"),
         role="instructor",
         is_active=True
     )
-    db.add(tran_user)
+    db.add(instructor_user)
 
     # 2. ONBOARDING: GOALS & INTERESTS (S03, S04)
     goals = [
@@ -233,7 +231,7 @@ def seed_database(db: Session):
         Instructor(
             name="Ms. Lan",
             title="Senior UI/UX & Data Specialist",
-            organization="VKU Academy & TechHub",
+            organization="Tech Academy & Innovation Hub",
             avatar_url="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200",
             bio="Hơn 8 năm kinh nghiệm thực chiến trong các dự án công nghệ lớn và giảng dạy chuyên sâu tại Đà Nẵng.",
             total_students=14200,
@@ -241,11 +239,11 @@ def seed_database(db: Session):
             total_courses=6
         ),
         Instructor(
-            name="ThS. Lý Quỳnh Trân",
-            title="Giảng viên Cố vấn Đồ án UX/UI",
-            organization="Trường ĐH CNTT & TT Việt - Hàn (VKU)",
+            name="Dr. Minh Tran",
+            title="Senior UX & System Architecture Advisor",
+            organization="Global Tech Institute",
             avatar_url="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=200",
-            bio="Giảng viên Khoa Kỹ thuật Máy tính & Điện tử, chuyên gia nghiên cứu về Human-Computer Interaction và Trải nghiệm người dùng.",
+            bio="Chuyên gia nghiên cứu về Human-Computer Interaction và Trải nghiệm người dùng.",
             total_students=8500,
             average_rating=5.0,
             total_courses=4
@@ -330,7 +328,7 @@ def seed_database(db: Session):
         Lesson(section_id=s2.id, title="05. Podcast: Kinh nghiệm xử lý dữ liệu thực tế", lesson_type="audio", duration_minutes=15, is_preview=False, order_index=5),
         Lesson(section_id=s2.id, title="06. Slide bài giảng: Chiến lược tiền xử lý dữ liệu", lesson_type="slide", duration_minutes=15, is_preview=False, order_index=6),
         Lesson(section_id=s3.id, title="07. Gom nhóm nâng cao với GroupBy và Aggregate", lesson_type="video", duration_minutes=25, is_preview=False, order_index=7),
-        Lesson(section_id=s3.id, title="08. Đồ án cuối khóa: Phân tích hành vi người dùng App", lesson_type="video", duration_minutes=30, is_preview=False, order_index=8)
+        Lesson(section_id=s3.id, title="08. Dự án hoàn thiện: Phân tích hành vi người dùng App", lesson_type="video", duration_minutes=30, is_preview=False, order_index=8)
     ]
     db.add_all(lessons_c1)
 
@@ -487,13 +485,13 @@ def seed_database(db: Session):
     cert1 = Certificate(
         user_id=hung_user.id,
         course_id=c2.id,
-        certificate_code="EDUPATH-VKU-2026-X89B",
+        certificate_code="EDUPATH-2026-X89B",
         student_name="Nguyễn Văn Hùng",
         course_title="Product Design Thinking & Systems",
-        instructor_name="Ms. Lan & ThS. Lý Quỳnh Trân",
+        instructor_name="Ms. Lan",
         issued_date=date.today(),
         final_grade="Xuất Sắc (Grade A+)",
-        verification_url="https://edupath.vku.udn.vn/verify/EDUPATH-VKU-2026-X89B"
+        verification_url="https://edupath.vn/verify/EDUPATH-2026-X89B"
     )
     db.add(cert1)
 
@@ -518,3 +516,4 @@ def seed_database(db: Session):
 
     db.commit()
     print("[+] Đã nạp thành công toàn bộ dữ liệu mẫu chuẩn cho 50 màn hình!")
+

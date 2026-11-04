@@ -10,12 +10,12 @@ from pydantic import BaseModel, EmailStr, Field
 class UserRegisterRequest(BaseModel):
     full_name: str = Field(..., example="Nguyễn Văn Hùng", min_length=2)
     email: EmailStr = Field(..., example="hung.nv@edupath.vn")
-    password: str = Field(..., example="RiseEduPath2026!", min_length=6)
+    password: str = Field(..., example="EduPath2026!", min_length=6)
     role: Optional[str] = "learner"
 
 class UserLoginRequest(BaseModel):
     email: EmailStr = Field(..., example="hung.nv@edupath.vn")
-    password: str = Field(..., example="RiseEduPath2026!")
+    password: str = Field(..., example="EduPath2026!")
 
 class TokenResponse(BaseModel):
     access_token: str
@@ -39,3 +39,4 @@ class UserProfileDTO(BaseModel):
 
     class Config:
         from_attributes = True
+

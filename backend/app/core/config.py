@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 EduPath Backend - Cấu hình hệ thống (Settings)
-Phục vụ môn Thiết kế UX/UI - Nhóm Rise (VKU)
-Giảng viên hướng dẫn: ThS. Lý Quỳnh Trân
 """
 
 import os
@@ -13,12 +11,12 @@ class Settings(BaseModel):
     VERSION: str = "2.0.0"
     API_V1_STR: str = "/api/v1"
     DESCRIPTION: str = (
-        "Hệ thống Backend RESTful API phục vụ nền tảng học tập EduPath (50 Màn hình Phần A & B). "
-        "Xây dựng bằng FastAPI, SQLAlchemy 2.0 và SQLite cho đồ án UX/UI - Giảng viên: ThS. Lý Quỳnh Trân."
+        "Hệ thống Backend RESTful API phục vụ nền tảng học tập EduPath (50 Màn hình). "
+        "Xây dựng bằng FastAPI, SQLAlchemy 2.0 và SQLite."
     )
     
     # Bảo mật JWT
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "edupath-rise-vku-secret-key-2026-ly-quynh-tran-secured")
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "edupath-platform-secret-key-2026-production")
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 ngày
     

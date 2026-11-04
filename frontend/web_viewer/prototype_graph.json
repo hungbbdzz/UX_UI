@@ -19646,105 +19646,90 @@
         "id": "P01",
         "name": "P01 · Học viên mới",
         "start_screen": "S01 – Splash",
-        "member": "Nguyễn Văn Hùng (23IT.B069)",
         "part": "Part A"
       },
       {
         "id": "P02",
         "name": "P02 · Khám phá khóa học",
         "start_screen": "S10 – Learner home",
-        "member": "Nguyễn Văn Hùng & Gia Minh",
         "part": "Part A & B"
       },
       {
         "id": "P03",
         "name": "P03 · Mua khóa học",
         "start_screen": "S30 – Course overview & preview",
-        "member": "Nguyễn Gia Minh (23IT.B132)",
         "part": "Part B"
       },
       {
         "id": "P04",
         "name": "P04 · Thi cuối khóa & chứng chỉ",
         "start_screen": "S47 – Certificate preview & sharing",
-        "member": "Nguyễn Gia Minh (23IT.B132)",
         "part": "Part B"
       },
       {
         "id": "P05",
         "name": "P05 · Nộp bài tập · học viên",
         "start_screen": "S65 – Submit assignment",
-        "member": "Nguyễn Bá Nghĩa (23IT.B137)",
         "part": "Part C"
       },
       {
         "id": "P05/P06",
         "name": "P05/P06 · Giảng viên · chấm bài & tạo khóa",
         "start_screen": "S97 – Instructor dashboard",
-        "member": "Lê Hoàng Vũ (23IT.B249)",
         "part": "Part E"
       },
       {
         "id": "P06",
         "name": "P06 · Giảng viên · Đăng nhập → S97",
         "start_screen": "A01 – Instructor sign-in",
-        "member": "Lê Hoàng Vũ (23IT.B249)",
         "part": "Part E"
       },
       {
         "id": "P06/P08/P09",
         "name": "P06/P08/P09 · Cổng quản trị",
         "start_screen": "A04 – Administrator sign-in",
-        "member": "Lê Hoàng Vũ (23IT.B249)",
         "part": "Part E"
       },
       {
         "id": "P07",
         "name": "P07 · Lớp trực tuyến",
         "start_screen": "S77 – Live class waiting room",
-        "member": "Nguyễn Ngọc Bảo Trung (23IT.B236)",
         "part": "Part D"
       },
       {
         "id": "P08",
         "name": "P08 · Cộng đồng & báo cáo",
         "start_screen": "S79 – Community home",
-        "member": "Nguyễn Ngọc Bảo Trung (23IT.B236)",
         "part": "Part D"
       },
       {
         "id": "P09",
         "name": "P09 · Hồ sơ & đăng ký giảng viên",
         "start_screen": "S18 – Profile & learning stats",
-        "member": "Nguyễn Văn Hùng (23IT.B069)",
         "part": "Part A"
       },
       {
         "id": "P10",
         "name": "P10 · Premium",
         "start_screen": "S91 – Subscription tiers",
-        "member": "Nguyễn Ngọc Bảo Trung (23IT.B236)",
         "part": "Part D"
       },
       {
         "id": "P10b",
         "name": "P10 · Đặt mentor",
         "start_screen": "S85 – Mentor directory",
-        "member": "Nguyễn Ngọc Bảo Trung (23IT.B236)",
         "part": "Part D"
       },
       {
         "id": "P11",
         "name": "P11 · Giao dịch & hoàn tiền",
         "start_screen": "S93 – Transaction history",
-        "member": "Nguyễn Ngọc Bảo Trung (23IT.B236)",
         "part": "Part D"
       },
       {
         "id": "P12",
         "name": "P12 · Đăng nhập học viên",
         "start_screen": "A01 – Shared sign-in",
-        "member": "Nguyễn Văn Hùng (23IT.B069)",
         "part": "Part A"
       }
     ]

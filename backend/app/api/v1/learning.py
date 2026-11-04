@@ -256,3 +256,4 @@ def complete_focus_session(
         xp_earned=earned_xp,
         message=f"Tuyệt vời! Bạn đã duy trì sự tập trung suốt {payload.session_minutes} phút và nhận được +{earned_xp} XP."
     )
+

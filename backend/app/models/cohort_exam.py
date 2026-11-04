@@ -70,12 +70,13 @@ class Certificate(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     course_id = Column(Integer, ForeignKey("courses.id"), nullable=False)
-    certificate_code = Column(String(100), unique=True, index=True, nullable=False)  # "EDUPATH-VKU-2026-X89B"
+    certificate_code = Column(String(100), unique=True, index=True, nullable=False)  # "EDUPATH-2026-X89B"
     student_name = Column(String(255), nullable=False)
     course_title = Column(String(255), nullable=False)
     instructor_name = Column(String(150), default="Ms. Lan")
     issued_date = Column(Date, default=date.today)
     final_grade = Column(String(20), default="Xuất Sắc (Grade A+)")
-    verification_url = Column(String(500), default="https://edupath.vku.udn.vn/verify/EDUPATH-VKU-2026-X89B")
+    verification_url = Column(String(500), default="https://edupath.vn/verify/EDUPATH-2026-X89B")
 
     user = relationship("User", back_populates="certificates")
+

@@ -95,3 +95,4 @@ class SkillNode(Base):
     status = Column(String(50), default="in_progress")  # locked, in_progress, mastered
     icon = Column(String(50), default="star")
     parent_id = Column(Integer, ForeignKey("skill_nodes.id"), nullable=True)
+

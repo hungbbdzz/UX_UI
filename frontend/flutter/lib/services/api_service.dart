@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 /// Dịch vụ kết nối API Backend EduPath (FastAPI)
-/// Phục vụ đồ án môn Thiết kế UX/UI - GV ThS. Lý Quỳnh Trân
 class EduPathApiService {
   static const String baseUrl = 'http://127.0.0.1:8000/api/v1';
 
@@ -95,3 +94,4 @@ class EduPathApiService {
     throw Exception('Lỗi tải khóa học đã đăng ký: ${response.body}');
   }
 }
+

@@ -77,3 +77,4 @@ class FocusSessionResponse(BaseModel):
     session_minutes: int
     xp_earned: int
     message: str
+

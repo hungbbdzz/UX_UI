@@ -249,7 +249,7 @@ def submit_final_quiz(
         ).first()
         if not cert:
             course = db.query(Course).filter(Course.id == course_id).first()
-            code = f"EDUPATH-VKU-2026-{uuid.uuid4().hex[:6].upper()}"
+            code = f"EDUPATH-2026-{uuid.uuid4().hex[:6].upper()}"
             cert = Certificate(
                 user_id=current_user.id,
                 course_id=course_id,
@@ -258,7 +258,7 @@ def submit_final_quiz(
                 course_title=course.title if course else "Khóa học",
                 instructor_name=course.instructor.name if (course and course.instructor) else "Ms. Lan",
                 final_grade="Xuất Sắc (Grade A+)",
-                verification_url=f"https://edupath.vku.udn.vn/verify/{code}"
+                verification_url=f"https://edupath.vn/verify/{code}"
             )
             db.add(cert)
 
@@ -293,7 +293,7 @@ def get_course_certificate(
     if not cert:
         # Nếu chưa có, tự động sinh chứng chỉ danh dự cho học viên test
         course = db.query(Course).filter(Course.id == course_id).first()
-        code = f"EDUPATH-VKU-2026-X89B"
+        code = f"EDUPATH-2026-X89B"
         cert = Certificate(
             user_id=current_user.id,
             course_id=course_id,
@@ -302,7 +302,7 @@ def get_course_certificate(
             course_title=course.title if course else "Applied Data Wrangling with Pandas",
             instructor_name="Ms. Lan",
             final_grade="Xuất Sắc (Grade A+)",
-            verification_url=f"https://edupath.vku.udn.vn/verify/{code}"
+            verification_url=f"https://edupath.vn/verify/{code}"
         )
         db.add(cert)
         db.commit()
@@ -330,3 +330,4 @@ def get_next_course_recommendations(course_id: int, db: Session = Depends(get_db
         )
         for i, c in enumerate(next_courses)
     ]
+

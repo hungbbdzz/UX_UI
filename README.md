@@ -2,29 +2,26 @@
 
 <div align="center">
 
-![VKU Badge](https://img.shields.io/badge/Trường-VKU%20Đà%20Nẵng-005696?style=for-the-badge&logo=school)
-![Course Badge](https://img.shields.io/badge/Môn_Học-Thiết_kế_UX%2FUI_(1)_TA-F59E0B?style=for-the-badge)
+![Platform Badge](https://img.shields.io/badge/Platform-Mobile%20%7C%20Web-005696?style=for-the-badge)
 ![FastAPI Badge](https://img.shields.io/badge/Backend-FastAPI_v2.0-009688?style=for-the-badge&logo=fastapi)
 ![Flutter Badge](https://img.shields.io/badge/Frontend-Flutter_3.x-02569B?style=for-the-badge&logo=flutter)
 ![React Native Badge](https://img.shields.io/badge/Mobile-React_Native-61DAFB?style=for-the-badge&logo=react)
 ![Python Badge](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-### **ĐỒ ÁN TỐT NGHIỆP MÔN THIẾT KẾ UX/UI (1)_TA**
-**Trường Đại học Công nghệ Thông tin & Truyền thông Việt - Hàn (VKU), Đại học Đà Nẵng**
-
-**Giảng viên hướng dẫn:** **ThS. Lý Quỳnh Trân** (`lqtran@vku.udn.vn`)  
-**Nhóm sinh viên thực hiện:** **Nhóm Rise**
+### **Enterprise E-Learning Mobile & Web Ecosystem**
+*Nền tảng học tập thông minh với 50 màn hình chuẩn thiết kế, Backend RESTful API và Trình mô phỏng tương tác cao.*
 
 </div>
 
 ---
 
-## 👥 Phân Công Nhiệm Vụ (Phần A & B — 50 Màn Hình)
+## 📱 Phạm Vi Hệ Thống (50 Màn Hình Trải Nghiệm)
 
-| Thành viên | MSSV | Vai trò & Phụ trách | Phạm vi màn hình |
-| :--- | :---: | :--- | :--- |
-| **Nguyễn Văn Hùng** | **`23IT.B069`** | **Phần A:** Onboarding, Cá nhân hóa & Trải nghiệm Học viên | `S01` – `S24`, `A01`, `A02` (26 màn hình) |
-| **Nguyễn Gia Minh** | **`23IT.B132`** | **Phần B:** Khám phá Khóa học, Học Đa phương tiện & Thi cử | `S25` – `S48` (24 màn hình) |
+| Phân Hệ | Phạm Vi Màn Hình | Tính Năng Trọng Tâm |
+| :--- | :---: | :--- |
+| **Phần A: Learner Experience & Onboarding** | `S01` – `S24`, `A01`, `A02` (26 màn hình) | Onboarding, Khảo sát mục tiêu, Đánh giá đầu vào, Trang chủ, Streak, Nhiệm vụ ngày, Hồ sơ |
+| **Phần B: Course Discovery & Multimedia** | `S25` – `S48` (24 màn hình) | Khám phá khóa học, Tìm kiếm nâng cao, Đề cương, Trình phát đa phương tiện, Thi & Chứng chỉ |
 
 ---
 
@@ -142,6 +139,5 @@ git push -u origin main
 ---
 
 <div align="center">
-  <b>Đồ án hoàn thiện bởi Nhóm Rise — VKU 2026</b><br/>
-  <i>Kính gửi cô ThS. Lý Quỳnh Trân đánh giá và chấm điểm.</i>
+  <b>EduPath Platform © 2026 — Open Source Project</b>
 </div>

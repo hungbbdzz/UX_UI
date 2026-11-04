@@ -2,7 +2,7 @@
 
 > **Cơ sở dữ liệu:** SQLite 3 với SQLAlchemy 2.0 ORM  
 > **Tổng số bảng thực thể:** 14 bảng quan hệ  
-> **Dự án:** EduPath Platform - Đồ án UX/UI Nhóm Rise (VKU - GV ThS. Lý Quỳnh Trân)
+> **Dự án:** EduPath Platform - Relational Database Schema
 
 ---
 
@@ -122,3 +122,4 @@ erDiagram
 12. **`daily_quests`**: Nhiệm vụ hàng ngày kèm tiến độ và thưởng XP (S10, S17).
 13. **`course_enrollments`**: Quản lý việc ghi danh khóa học và % hoàn thành (S46, S47).
 14. **`certificates`**: Chứng chỉ số tốt nghiệp có mã tra cứu chính thức (S47, S48).
+

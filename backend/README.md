@@ -1,12 +1,6 @@
 # EduPath Backend RESTful API Engine
 
-> **Đồ án môn học:** Thiết kế UX/UI (1)_TA  
-> **Trường:** ĐH Công nghệ Thông tin & Truyền thông Việt - Hàn (VKU), ĐH Đà Nẵng  
-> **Giảng viên hướng dẫn:** ThS. Lý Quỳnh Trân (`lqtran@vku.udn.vn`)  
-> **Nhóm thực hiện:** Nhóm Rise  
-> **Thành viên phụ trách:**
-> - **Nguyễn Văn Hùng** - `23IT.B069` (Phần A: S01–S24 + A01, A02: Onboarding, Personalization & Learner Experience)
-> - **Nguyễn Gia Minh** - `23IT.B132` (Phần B: S25–S48: Course Discovery, Multimedia Learning, Cohort & Exam)
+> **EduPath Backend Service:** Hệ thống RESTful API hoàn chỉnh xây dựng bằng FastAPI, SQLAlchemy 2.0 và SQLite phục vụ toàn diện 50 màn hình ứng dụng học tập.
 
 ---
 
@@ -105,3 +99,4 @@ backend/
 ├── run_backend.bat
 └── README.md
 ```
+
