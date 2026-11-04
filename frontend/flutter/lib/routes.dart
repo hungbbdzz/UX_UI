@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'routes_s49_s96.dart';
 import 'screens/s01_splash.dart';
 import 'screens/s03_select_learning_goal.dart';
 import 'screens/s04_select_interests.dart';
@@ -101,7 +102,11 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/s48_next_course_recommendations': (context) => const S48NextCourseRecommendationsScreen(),
   '/s47_course_progress_details': (context) => const S47CourseProgressDetailsScreen(),
   '/s46_my_courses': (context) => const S46MyCoursesScreen(),
-  '/s45_choose_cohort_schedule': (context) => const S45ChooseCohortScheduleScreen()
+  '/s45_choose_cohort_schedule': (context) => const S45ChooseCohortScheduleScreen(),
+  ...s49S96Routes,
 };
 
-const String initialRoute = '/s01_splash';
+const String initialRoute = String.fromEnvironment(
+  'INITIAL_ROUTE',
+  defaultValue: '/s01_splash',
+);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'routes.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(const FigmaEduPathApp());
@@ -13,16 +14,7 @@ class FigmaEduPathApp extends StatelessWidget {
     return MaterialApp(
       title: 'EduPath Prototype (Figma Extracted)',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF2A14B4),
-          primary: const Color(0xFF2A14B4),
-          secondary: const Color(0xFFFD761A),
-          surface: const Color(0xFFF9F9FF),
-        ),
-        useMaterial3: true,
-        fontFamily: 'Inter',
-      ),
+      theme: buildEduPathTheme(),
       initialRoute: initialRoute,
       routes: appRoutes,
     );

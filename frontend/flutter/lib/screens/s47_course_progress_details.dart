@@ -46,7 +46,7 @@ class S47CourseProgressDetailsScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF2A14B4).withOpacity(0.08),
+                          color: const Color(0xFF2A14B4).withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
