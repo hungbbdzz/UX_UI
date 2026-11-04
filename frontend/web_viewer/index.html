@@ -36,12 +36,11 @@
       max-width: 390px !important;
       height: 760px !important;
     }
-    /* Viewport điện thoại chuẩn 390px tuyệt đối có Safe Area padding-top cho tai thỏ */
+    /* Viewport điện thoại chuẩn 390px tuyệt đối - Cuộn nội dung bên dưới Safe Area Header */
     #phone-screen-viewport {
       width: 390px !important;
       min-width: 390px !important;
       max-width: 390px !important;
-      padding-top: 38px !important;
       scrollbar-width: none !important;
       -ms-overflow-style: none !important;
     }
@@ -226,10 +225,10 @@
         <!-- Phone Screen Inside Viewport Frame (EXACTLY 390px WIDE x 760px HIGH) -->
         <div id="phone-screen-frame" class="relative w-[390px] h-[760px] bg-[#F9F9FF] rounded-[42px] overflow-hidden flex flex-col select-none ring-1 ring-black/40 shadow-inner">
           
-          <!-- IPHONE 13 PRO / 14 STATUS BAR (Time 9:41, Notch, Cellular, Wifi & Battery) -->
-          <div class="absolute top-0 left-0 w-[390px] h-[36px] z-50 flex items-center justify-between px-6 pointer-events-none select-none">
+          <!-- IPHONE 13 PRO / 14 STATUS BAR (Cố định ở đỉnh, bảo vệ Safe Area - Không bị đè khi cuộn) -->
+          <header id="phone-status-bar" class="w-[390px] h-[40px] shrink-0 bg-[#F9F9FF] border-b border-slate-200/50 flex items-center justify-between px-6 relative z-50 select-none shadow-[0_1px_3px_rgba(0,0,0,0.03)] transition-colors duration-200">
             <!-- Left: Time 9:41 -->
-            <span class="text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1">9:41</span>
+            <span id="status-time" class="text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1">9:41</span>
 
             <!-- Center: Apple Notch -->
             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[124px] h-[23px] bg-[#000000] rounded-b-[15px] flex items-center justify-center gap-2.5 px-3 shadow-sm pointer-events-auto">
@@ -242,17 +241,17 @@
             </div>
 
             <!-- Right: Status Icons (Cellular, Wifi, Battery) -->
-            <div class="flex items-center gap-1.5 text-slate-800 pr-1">
+            <div id="status-icons" class="flex items-center gap-1.5 text-slate-800 pr-1">
               <span class="material-symbols-outlined text-[13px] leading-none">signal_cellular_4_bar</span>
               <span class="material-symbols-outlined text-[13px] leading-none">wifi</span>
-              <div class="w-4 h-2 border border-slate-700/80 rounded-[2px] p-[0.5px] flex items-center">
-                <div class="w-2.5 h-full bg-slate-800 rounded-[0.5px]"></div>
+              <div class="w-4 h-2 border border-current rounded-[2px] p-[0.5px] flex items-center">
+                <div class="w-2.5 h-full bg-current rounded-[0.5px]"></div>
               </div>
             </div>
-          </div>
+          </header>
 
-          <!-- Scrollable Screen Content (Takes remaining height above pinned nav) -->
-          <div id="phone-screen-viewport" class="relative w-[390px] flex-1 min-h-0 pt-[38px] overflow-y-auto overflow-x-hidden flex flex-col select-none">
+          <!-- Scrollable Screen Content (Vùng cuộn bắt đầu bên dưới Status Bar - Tự động clip nội dung khi lướt lên) -->
+          <div id="phone-screen-viewport" class="relative w-[390px] flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col select-none">
             <!-- Rendered content (Image + Hotspots Layer) -->
             <div id="screen-render-target" class="w-[390px] relative">
               <!-- Rendered by JS -->
@@ -691,6 +690,24 @@
       // Update Right Sidebar Interactions
       renderInteractions(sc);
       renderSidebar();
+
+      // Đồng bộ màu thanh Status Bar theo nền màn hình
+      const statusBar = document.getElementById('phone-status-bar');
+      const statusTime = document.getElementById('status-time');
+      const statusIcons = document.getElementById('status-icons');
+      if (statusBar && statusTime && statusIcons) {
+        if (sc.pascal_name === 'S01Splash') {
+          statusBar.style.backgroundColor = '#3626bf';
+          statusBar.style.borderColor = 'rgba(255,255,255,0.12)';
+          statusTime.className = "text-[12px] font-semibold text-white tracking-tight font-sans pl-1";
+          statusIcons.className = "flex items-center gap-1.5 text-white pr-1";
+        } else {
+          statusBar.style.backgroundColor = '#F9F9FF';
+          statusBar.style.borderColor = 'rgba(226,232,248,0.7)';
+          statusTime.className = "text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1";
+          statusIcons.className = "flex items-center gap-1.5 text-slate-800 pr-1";
+        }
+      }
     }
 
     function renderHotspots(sc, container, hasNav, rawHeight) {
