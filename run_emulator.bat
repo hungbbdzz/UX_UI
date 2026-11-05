@@ -7,7 +7,10 @@ echo ======================================================================
 set "SDK_DIR=C:\Users\hunga\AppData\Local\Android\sdk"
 set "EMULATOR_EXE=%SDK_DIR%\emulator\emulator.exe"
 set "ADB_EXE=%SDK_DIR%\platform-tools\adb.exe"
-set "APK_FILE=%~dp0frontend\flutter\build\app\outputs\flutter-apk\app-debug.apk"
+set "APK_FILE=%~dp0EduPath_v2.apk"
+if not exist "%APK_FILE%" (
+    set "APK_FILE=%~dp0frontend\flutter\build\app\outputs\flutter-apk\app-debug.apk"
+)
 
 echo [*] Checking running Android emulator...
 "%ADB_EXE%" devices | findstr /R "emulator-[0-9]*" >nul
