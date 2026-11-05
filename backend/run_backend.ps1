@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+Set-Location $PSScriptRoot
+
 Write-Host "======================================================================" -ForegroundColor Cyan
 Write-Host "   🚀 KHỞI ĐỘNG HỆ THỐNG EDUPATH BACKEND (FASTAPI + SQLALCHEMY 2.0)" -ForegroundColor Green
 Write-Host "   📌 Nền tảng học tập thông minh EduPath (FastAPI Engine)" -ForegroundColor Yellow
@@ -15,4 +17,3 @@ Write-Host "[i] Mở tài liệu Swagger UI tương tác tại: http://127.0.0.1
 Write-Host ""
 
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
-
