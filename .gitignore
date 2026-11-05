@@ -41,3 +41,6 @@ desktop.ini
 
 # Logs & temp
 *.log
+*.apk
+.idea/
+emulator_screenshot.png
