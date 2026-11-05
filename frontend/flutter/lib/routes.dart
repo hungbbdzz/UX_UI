@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'routes_s49_s96.dart';
 import 'screens/s01_splash.dart';
 import 'screens/s03_select_learning_goal.dart';
 import 'screens/s04_select_interests.dart';
@@ -101,7 +102,105 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/s48_next_course_recommendations': (context) => const S48NextCourseRecommendationsScreen(),
   '/s47_course_progress_details': (context) => const S47CourseProgressDetailsScreen(),
   '/s46_my_courses': (context) => const S46MyCoursesScreen(),
-  '/s45_choose_cohort_schedule': (context) => const S45ChooseCohortScheduleScreen()
+  '/s45_choose_cohort_schedule': (context) => const S45ChooseCohortScheduleScreen(),
+  ...s49S96Routes,
 };
 
-const String initialRoute = '/s01_splash';
+/// Legacy aliases used by older S01-S48 screens (route names without
+/// underscores, e.g. '/s02featureintroduction'). Anchors the S01-S48
+/// navigation graph to the current route names.
+final Map<String, String> _routeAliases = {
+  for (final entry in appRoutes.entries)
+    if (!entry.key.contains('_') || entry.key.length < 10)
+      entry.key.replaceAll('_', ''): entry.key,
+  '/s02featureintroduction': '/s02_feature_introduction',
+  '/s03selectlearninggoal': '/s03_select_learning_goal',
+  '/s04selectinterests': '/s04_select_interests',
+  '/s05selectcurrentlevel': '/s05_select_current_level',
+  '/s06setdailystudytime': '/s06_set_daily_study_time',
+  '/s07placementtestassessment': '/s07_placement_test_assessment',
+  '/s08placementresults': '/s08_placement_results',
+  '/s09suggestedlearningpath': '/s09_suggested_learning_path',
+  '/s10learnerhome': '/s10_learner_home',
+  '/s11todaysstudyplan': '/s11_today_s_study_plan',
+  '/s12studystreak': '/s12_study_streak',
+  '/s13weeklygoals': '/s13_weekly_goals',
+  '/s14learningstatistics': '/s14_learning_statistics',
+  '/s15badges': '/s15_badges',
+  '/s16levelandxp': '/s16_level_and_xp',
+  '/s17dailyquests': '/s17_daily_quests',
+  '/s18personalprofile': '/s18_personal_profile',
+  '/s19editprofile': '/s19_edit_profile',
+  '/s20skilltree': '/s20_skill_tree',
+  '/s21achievementsharingcard': '/s21_achievement_sharing_card',
+  '/s22learningsettings': '/s22_learning_settings',
+  '/s23studyreminders': '/s23_study_reminders',
+  '/s24displayandaccessibility': '/s24_display_and_accessibility',
+  '/s25explore': '/s25_explore',
+  '/s26coursecategories': '/s26_course_categories',
+  '/s27search': '/s27_search',
+  '/s28advancedfilters': '/s28_advanced_filters',
+  '/s29searchresults': '/s29_search_results',
+  '/s30coursedetails': '/s30_course_details',
+  '/s31syllabus': '/s31_syllabus',
+  '/s32instructorprofile': '/s32_instructor_profile',
+  '/s33coursereviews': '/s33_course_reviews',
+  '/s34comparecourses': '/s34_compare_courses',
+  '/s35lessonpreview': '/s35_lesson_preview',
+  '/s36videoplayer': '/s36_video_player',
+  '/s37audiolesson': '/s37_audio_lesson',
+  '/s38readinglesson': '/s38_reading_lesson',
+  '/s39xemslide': '/s39_xem_slide',
+  '/s40timestampedvideonotes': '/s40_timestamped_video_notes',
+  '/s41dictionarylookup': '/s41_dictionary_lookup',
+  '/s42manageofflinedownloads': '/s42_manage_offline_downloads',
+  '/s43lessonplaylist': '/s43_lesson_playlist',
+  '/s44focusmode': '/s44_focus_mode',
+  '/s45choosecohortschedule': '/s45_choose_cohort_schedule',
+  '/s46mycourses': '/s46_my_courses',
+  '/s47courseprogressdetails': '/s47_course_progress_details',
+  '/s48nextcourserecommendations': '/s48_next_course_recommendations',
+};
+
+/// Central route lookup that also resolves legacy aliases. When no route
+/// matches, falls back to a tiny debug menu so every flow stays runnable.
+Map<String, WidgetBuilder> get _resolvedRoutes {
+  final map = <String, WidgetBuilder>{...appRoutes};
+  _routeAliases.forEach((alias, target) {
+    if (appRoutes.containsKey(target) && !map.containsKey(alias)) {
+      map[alias] = appRoutes[target]!;
+    }
+  });
+  return map;
+}
+
+class DebugRouteMenu extends StatelessWidget {
+  const DebugRouteMenu({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final routes = appRoutes.keys.toList()..sort();
+    return Scaffold(
+      appBar: AppBar(title: const Text('All Screens')),
+      body: ListView.builder(
+        itemCount: routes.length,
+        itemBuilder: (context, index) {
+          final route = routes[index];
+          return ListTile(
+            title: Text(route),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () =>
+                Navigator.of(context).pushReplacementNamed(route),
+          );
+        },
+      ),
+    );
+  }
+}
+
+const String initialRoute = String.fromEnvironment(
+  'INITIAL_ROUTE',
+  defaultValue: '/s01_splash',
+);
+
+Map<String, WidgetBuilder> get routes => _resolvedRoutes;

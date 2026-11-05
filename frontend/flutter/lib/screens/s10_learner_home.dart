@@ -46,7 +46,7 @@ class S10LearnerHomeScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF2A14B4).withOpacity(0.08),
+                          color: const Color(0xFF2A14B4).withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -297,7 +297,7 @@ class S10LearnerHomeScreen extends StatelessWidget {
                 onPressed: () => Navigator.pushNamed(context, '/s11todaysstudyplan'),
                 icon: const Icon(Icons.arrow_forward_rounded, size: 18),
                 label: Text(
-                  'Link → View all (5 tasks) → → S11 – Today's study plan',
+                  'Link → View all (5 tasks) → → S11 – Today\'s study plan',
                   style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -364,7 +364,7 @@ class S10LearnerHomeScreen extends StatelessWidget {
                 onPressed: () => Navigator.pushNamed(context, '/s11todaysstudyplan'),
                 icon: const Icon(Icons.arrow_forward_rounded, size: 18),
                 label: Text(
-                  'Study schedule → → S11 – Today's study plan',
+                  'Study schedule → → S11 – Today\'s study plan',
                   style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -406,7 +406,7 @@ class S10LearnerHomeScreen extends StatelessWidget {
                 onPressed: () => Navigator.pushNamed(context, '/s11todaysstudyplan'),
                 icon: const Icon(Icons.arrow_forward_rounded, size: 18),
                 label: Text(
-                  'Weekly goals → → S11 – Today's study plan',
+                  'Weekly goals → → S11 – Today\'s study plan',
                   style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                   overflow: TextOverflow.ellipsis,
                 ),
