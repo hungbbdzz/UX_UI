@@ -69,6 +69,26 @@ for sc in screens:
         with open(rn_file, "r", encoding="utf-8") as f:
             rn_code = f.read()
 
+    # Enrich full outgoing interactions from hotspots if empty
+    interactions = list(sc.get("outgoing_links", []))
+    if not interactions and sc.get("hotspots"):
+        for hs in sc["hotspots"]:
+            interactions.append({
+                "source_layer": hs.get("layer", "Tap target"),
+                "trigger": "ON_CLICK",
+                "destination_pascal": hs.get("target_pascal", ""),
+                "destination_title": hs.get("target_title", hs.get("target_pascal", "")),
+                "destination_page": hs.get("target_page", ""),
+                "destination_id": hs.get("target_id", ""),
+                "is_internal": hs.get("is_internal", True),
+                "btn_x": hs.get("x", 0) + hs.get("w", 0) / 2,
+                "btn_y": hs.get("y", 0) + hs.get("h", 0) / 2,
+                "btn_w": hs.get("w", 0),
+                "btn_h": hs.get("h", 0),
+                "action_type": "NODE",
+                "navigation": "NAVIGATE"
+            })
+
     screens_data.append({
         "id": sc["id"],
         "name": sc["name"],
@@ -77,7 +97,7 @@ for sc in screens:
         "safe_name": safe_name,
         "width": sc["width"],
         "height": sc["height"],
-        "interactions": sc.get("outgoing_links", []),
+        "interactions": interactions,
         "hotspots": sc.get("hotspots", []),
         "flutter_code": flutter_code,
         "rn_code": rn_code
@@ -117,18 +137,25 @@ html_content = f"""<!DOCTYPE html>
     }}
   </script>
   <style>
-    /* Phone Screen Frame 390x750 */
+    /* Phone Screen Frame 390x844 (iPhone 13/14 Pro Authentic Resolution) */
     #phone-screen-frame {{
       width: 390px !important;
       min-width: 390px !important;
       max-width: 390px !important;
-      height: 760px !important;
+      height: 844px !important;
+      position: relative !important;
+      overflow: hidden !important;
+      border-radius: 44px !important;
     }}
-    /* Viewport điện thoại chuẩn 390px tuyệt đối */
+    /* Viewport điện thoại chuẩn 390px x 844px */
     #phone-screen-viewport {{
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
       width: 390px !important;
-      min-width: 390px !important;
-      max-width: 390px !important;
+      height: 844px !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
       scrollbar-width: none !important;
       -ms-overflow-style: none !important;
     }}
@@ -136,10 +163,12 @@ html_content = f"""<!DOCTYPE html>
       display: none !important;
     }}
     #pinned-bottom-nav {{
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
       width: 390px !important;
-      min-width: 390px !important;
-      max-width: 390px !important;
-      height: 64px !important;
+      height: 68px !important;
+      z-index: 40 !important;
     }}
     #screen-render-target,
     #screen-render-target img {{
@@ -312,32 +341,19 @@ html_content = f"""<!DOCTYPE html>
         <div class="absolute -left-[2px] bottom-[68px] w-[2px] h-[3px] bg-[#12151d] pointer-events-none"></div>
         <div class="absolute -right-[2px] bottom-[68px] w-[2px] h-[3px] bg-[#12151d] pointer-events-none"></div>
 
-        <!-- Phone Screen Inside Viewport Frame (EXACTLY 390px WIDE x 760px HIGH) -->
-        <div id="phone-screen-frame" class="relative w-[390px] h-[760px] bg-white rounded-[42px] overflow-hidden flex flex-col select-none ring-1 ring-black/40 shadow-inner">
+        <!-- Phone Screen Inside Viewport Frame (EXACTLY 390px WIDE x 844px HIGH) -->
+        <div id="phone-screen-frame" class="relative w-[390px] h-[844px] bg-[#F9F9FF] rounded-[44px] overflow-hidden select-none ring-1 ring-black/40 shadow-inner">
           
-          <!-- IPHONE 13 PRO / 14 STATUS BAR (Cố định ở đỉnh, bảo vệ Safe Area - Không bị đè khi cuộn) -->
-          <header id="phone-status-bar" class="w-[390px] h-[40px] shrink-0 bg-[#F9F9FF] border-b border-slate-200/50 flex items-center justify-between px-6 relative z-50 select-none shadow-[0_1px_3px_rgba(0,0,0,0.03)] transition-colors duration-200">
-            <!-- Left: Time 9:41 -->
-            <span id="status-time" class="text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1">9:41</span>
-
-            <!-- Center Notch Space -->
-            <div class="w-[124px] h-[23px] bg-[#000000] rounded-b-[15px] absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2.5 px-3 pointer-events-none shadow-sm">
-              <div class="w-[38px] h-[3.5px] bg-[#1a1d24] rounded-full ring-1 ring-white/10"></div>
-              <div class="w-[7px] h-[7px] bg-[#0d1017] rounded-full ring-1 ring-[#1f2638] flex items-center justify-center">
-                <div class="w-[3px] h-[3px] bg-[#0b1b3a] rounded-full"></div>
-              </div>
+          <!-- IPHONE 13 PRO / 14 NOTCH OVERLAY (Overlays Safe Area without shifting content down) -->
+          <div class="w-[124px] h-[24px] bg-[#000000] rounded-b-[15px] absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2.5 px-3 pointer-events-none shadow-sm z-50">
+            <div class="w-[38px] h-[3.5px] bg-[#1a1d24] rounded-full ring-1 ring-white/10"></div>
+            <div class="w-[7px] h-[7px] bg-[#0d1017] rounded-full ring-1 ring-[#1f2638] flex items-center justify-center">
+              <div class="w-[3px] h-[3px] bg-[#0b1b3a] rounded-full"></div>
             </div>
+          </div>
 
-            <!-- Right: Status Icons (Cellular, Wifi, Battery) -->
-            <div id="status-icons" class="flex items-center gap-1.5 text-slate-800 pr-1">
-              <span class="material-symbols-outlined text-[13px] leading-none">signal_cellular_alt</span>
-              <span class="material-symbols-outlined text-[13px] leading-none">wifi</span>
-              <span class="material-symbols-outlined text-[15px] leading-none">battery_full</span>
-            </div>
-          </header>
-
-          <!-- Scrollable Screen Content (Takes remaining height above pinned nav) -->
-          <div id="phone-screen-viewport" class="relative w-[390px] flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col select-none">
+          <!-- Scrollable Screen Content Viewport (Starts at top 0, native Figma status bar aligns with notch) -->
+          <div id="phone-screen-viewport" class="absolute inset-0 w-[390px] h-[844px] overflow-y-auto overflow-x-hidden flex flex-col select-none">
             <!-- Rendered content (Image + Hotspots Layer) -->
             <div id="screen-render-target" class="w-[390px] relative">
               <!-- Rendered by JS -->
@@ -345,10 +361,12 @@ html_content = f"""<!DOCTYPE html>
           </div>
 
           <!-- PINNED / FIXED 5-TAB BOTTOM NAVIGATION BAR (Exact Figma Spec) -->
-          <nav id="pinned-bottom-nav" class="w-[390px] h-[68px] pb-3 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-1 flex items-center justify-around shrink-0 z-40 transition-all select-none shadow-[0_-4px_16px_rgba(0,0,0,0.04)] relative">
-            <!-- Rendered dynamically by renderPinnedBottomNav(sc) -->
-            <!-- INTEGRATED HOME BAR (Pinned inside bottom dock) -->
-            <div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-800/40 rounded-full pointer-events-none"></div>
+          <nav id="pinned-bottom-nav" class="absolute bottom-0 left-0 w-[390px] h-[68px] pb-1.5 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-1 flex flex-col justify-between shrink-0 z-40 transition-all select-none shadow-[0_-4px_16px_rgba(0,0,0,0.04)]">
+            <div id="pinned-nav-tabs" class="w-full flex items-center justify-around flex-1 pt-1">
+              <!-- Rendered dynamically by renderPinnedBottomNav(sc) -->
+            </div>
+            <!-- Integrated iOS Home Indicator Safe Area Bar -->
+            <div class="w-32 h-1 bg-slate-800/40 rounded-full mx-auto mb-1 pointer-events-none"></div>
           </nav>
         </div>
       </div>
@@ -479,11 +497,25 @@ html_content = f"""<!DOCTYPE html>
       return img.clientWidth / 390.0;
     }}
 
+    // Tự động điều chỉnh tỷ lệ khung điện thoại theo độ cao màn hình máy tính (tránh cuộn trang ngoài)
+    function updateChassisScale() {{
+      const main = document.querySelector('main');
+      const chassis = document.getElementById('phone-hardware-chassis');
+      if (!main || !chassis) return;
+      const availH = main.clientHeight - 40;
+      const scale = Math.min(1.0, Math.max(0.65, availH / 890));
+      chassis.style.transform = `scale(${{scale}})`;
+      chassis.style.transformOrigin = 'center center';
+    }}
+
+    window.addEventListener('resize', updateChassisScale);
+
     // Khởi tạo giao diện
     window.addEventListener('DOMContentLoaded', () => {{
       initFlowSelect();
       renderSidebar();
       loadScreen(0);
+      setTimeout(updateChassisScale, 50);
     }});
 
     function initFlowSelect() {{
@@ -691,8 +723,8 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     function renderPinnedBottomNav(sc) {{
-      const nav = document.getElementById('pinned-bottom-nav');
-      if (!nav) return;
+      const tabsContainer = document.getElementById('pinned-nav-tabs');
+      if (!tabsContainer) return;
 
       const currentTab = getActiveNavTab(sc.pascal_name);
 
@@ -704,7 +736,7 @@ html_content = f"""<!DOCTYPE html>
         {{ id: 'profile', label: 'Profile', icon: 'person', target: 'S18PersonalProfile', isInternal: true }}
       ];
 
-      nav.innerHTML = tabs.map(tab => {{
+      tabsContainer.innerHTML = tabs.map(tab => {{
         const isActive = tab.id === currentTab;
         const pillBg = isActive ? 'bg-[#EDE9FE]' : 'bg-transparent';
         const textColor = isActive ? 'text-[#2A14B4] font-bold' : 'text-slate-500 font-medium hover:text-slate-800';
@@ -715,11 +747,11 @@ html_content = f"""<!DOCTYPE html>
             type="button"
             id="pinned-nav-tab-${{tab.id}}"
             onclick="onPinnedNavClick(event, '${{tab.target}}', ${{tab.isInternal}}, '${{tab.toastMsg || ''}}')"
-            class="flex flex-col items-center justify-center flex-1 h-full py-1 transition-all group focus:outline-none relative select-none"
+            class="flex flex-col items-center justify-center flex-1 h-full py-0.5 transition-all group focus:outline-none relative select-none"
             title="${{tab.label}}"
           >
-            <div class="px-3.5 py-1 rounded-full ${{pillBg}} flex items-center justify-center transition-colors">
-              <span class="material-symbols-outlined text-[21px] ${{iconColor}} transition-transform group-active:scale-90">${{tab.icon}}</span>
+            <div class="px-3.5 py-0.5 rounded-full ${{pillBg}} flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[20px] ${{iconColor}} transition-transform group-active:scale-90">${{tab.icon}}</span>
             </div>
             <span class="text-[10px] mt-0.5 tracking-tight ${{textColor}}">${{tab.label}}</span>
           </button>
@@ -769,15 +801,15 @@ html_content = f"""<!DOCTYPE html>
       // Create Screen Container với min-height chuẩn để scrollHeight sẵn sàng 100%
       const imgContainer = document.createElement('div');
       imgContainer.className = "relative w-[390px]";
+      imgContainer.style.height = "auto";
+      imgContainer.style.minHeight = rawHeight + "px";
+      imgContainer.style.overflow = "visible";
       
       if (hasNav) {{
-        // Cắt bỏ 64px tĩnh ở đáy ảnh Figma để nhường chỗ hoàn toàn cho thanh bottom nav cố định
-        imgContainer.style.height = (rawHeight - 64) + "px";
-        imgContainer.style.overflow = "hidden";
+        // Safe area padding-bottom để cuộn trôi lên trên thanh nav cố định (không bị che)
+        imgContainer.style.paddingBottom = "74px";
       }} else {{
-        imgContainer.style.height = "auto";
-        imgContainer.style.minHeight = rawHeight + "px";
-        imgContainer.style.overflow = "visible";
+        imgContainer.style.paddingBottom = "0px";
       }}
 
       // Create Image
@@ -801,24 +833,6 @@ html_content = f"""<!DOCTYPE html>
       // Update Right Sidebar Interactions
       renderInteractions(sc);
       renderSidebar();
-
-      // Đồng bộ màu thanh Status Bar theo nền màn hình
-      const statusBar = document.getElementById('phone-status-bar');
-      const statusTime = document.getElementById('status-time');
-      const statusIcons = document.getElementById('status-icons');
-      if (statusBar && statusTime && statusIcons) {{
-        if (sc.pascal_name === 'S01Splash') {{
-          statusBar.style.backgroundColor = '#3626bf';
-          statusBar.style.borderColor = 'rgba(255,255,255,0.12)';
-          statusTime.className = "text-[12px] font-semibold text-white tracking-tight font-sans pl-1";
-          statusIcons.className = "flex items-center gap-1.5 text-white pr-1";
-        }} else {{
-          statusBar.style.backgroundColor = '#F9F9FF';
-          statusBar.style.borderColor = 'rgba(226,232,248,0.7)';
-          statusTime.className = "text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1";
-          statusIcons.className = "flex items-center gap-1.5 text-slate-800 pr-1";
-        }}
-      }}
     }}
 
     function renderHotspots(sc, container, hasNav, rawHeight) {{

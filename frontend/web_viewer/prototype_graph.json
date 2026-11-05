@@ -11577,7 +11577,50 @@
       "height": 1050.0,
       "interactions_count": 0,
       "outgoing_links": [],
-      "hotspots": []
+      "hotspots": [
+        {
+          "layer": "Button - Minimize focus mode",
+          "x": 16.0,
+          "y": 51.0,
+          "w": 40.0,
+          "h": 40.0,
+          "cx": 36.0,
+          "cy": 71.0,
+          "target_pascal": "GoBack",
+          "target_title": "Quay lại màn trước",
+          "target_page": "Part B · Member 2 — Course discovery and learning content (S25–S48)",
+          "target_id": "GoBack",
+          "is_internal": true
+        },
+        {
+          "layer": "Button - Return to study plan",
+          "x": 301.5,
+          "y": 132.0,
+          "w": 56.5,
+          "h": 22.0,
+          "cx": 329.75,
+          "cy": 143.0,
+          "target_pascal": "S11TodaySStudyPlan",
+          "target_title": "S11 – Today's study plan",
+          "target_page": "Part A · Member 1 — Onboarding, personalization and progress (S01–S24)",
+          "target_id": "2264:14444",
+          "is_internal": true
+        },
+        {
+          "layer": "Button - End or reset session",
+          "x": 289.2,
+          "y": 509.0,
+          "w": 84.8,
+          "h": 56.0,
+          "cx": 331.6,
+          "cy": 537.0,
+          "target_pascal": "GoBack",
+          "target_title": "Kết thúc phiên",
+          "target_page": "Part B · Member 2 — Course discovery and learning content (S25–S48)",
+          "target_id": "GoBack",
+          "is_internal": true
+        }
+      ]
     },
     {
       "id": "21:12558",
