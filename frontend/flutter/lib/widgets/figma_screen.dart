@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'quick_screen_jumper.dart';
 
 const bool _showDebugNav = bool.fromEnvironment('SHOW_DEBUG_NAV', defaultValue: false);
 
@@ -62,7 +63,10 @@ class FigmaScreen extends StatelessWidget {
       body: SafeArea(
         top: true,
         bottom: false,
-        child: LayoutBuilder(
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onDoubleTap: () => QuickScreenJumper.show(context),
+          child: LayoutBuilder(
           builder: (context, constraints) {
             final canvasWidth = constraints.maxWidth > 460 ? 430.0 : constraints.maxWidth;
             final scale = canvasWidth / width;
@@ -119,6 +123,7 @@ class FigmaScreen extends StatelessWidget {
               ),
             );
           },
+        ),
         ),
       ),
     );
