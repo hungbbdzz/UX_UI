@@ -59,59 +59,67 @@ class FigmaScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       bottomNavigationBar: _hasBottomNav ? FigmaBottomNav(activeTab: _activeTab) : null,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final canvasWidth = constraints.maxWidth > 460 ? 430.0 : constraints.maxWidth;
-          final scale = canvasWidth / width;
-          final scaledHeight = height * scale;
-          final viewportHeight = constraints.maxHeight;
-          final canScroll = scaledHeight > (viewportHeight + 2);
-          final stackHeight =
-              scaledHeight < viewportHeight ? viewportHeight : scaledHeight;
+      body: SafeArea(
+        top: true,
+        bottom: false,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final canvasWidth = constraints.maxWidth > 460 ? 430.0 : constraints.maxWidth;
+            final scale = canvasWidth / width;
+            // Nếu màn hình có Bottom Nav cố định (FigmaBottomNav), cắt bỏ 64px tĩnh ở đáy ảnh Figma
+            // để triệt tiêu hoàn toàn thanh nav thứ 2 (chống Tôn hành giả - Giả hành tôn)
+            final displayHeight = _hasBottomNav ? (height - 64.0) : height;
+            final scaledHeight = displayHeight * scale;
+            final viewportHeight = constraints.maxHeight;
+            final canScroll = scaledHeight > (viewportHeight + 2);
+            final stackHeight =
+                scaledHeight < viewportHeight ? viewportHeight : scaledHeight;
 
-          return SingleChildScrollView(
-            physics: canScroll
-                ? const ClampingScrollPhysics()
-                : const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(bottom: _hasBottomNav ? 16.0 : 0.0),
-            child: Center(
-              child: SizedBox(
-                width: canvasWidth,
-                height: stackHeight,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      width: canvasWidth,
-                      height: scaledHeight,
-                      child: Transform.scale(
-                        scale: scale,
-                        alignment: Alignment.topLeft,
-                        child: SizedBox(
-                          width: width,
-                          height: height,
-                          child: child,
+            return SingleChildScrollView(
+              physics: canScroll
+                  ? const ClampingScrollPhysics()
+                  : const NeverScrollableScrollPhysics(),
+              child: Center(
+                child: SizedBox(
+                  width: canvasWidth,
+                  height: stackHeight,
+                  child: ClipRect(
+                    child: Stack(
+                      clipBehavior: Clip.hardEdge,
+                      children: [
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          width: canvasWidth,
+                          height: height * scale,
+                          child: Transform.scale(
+                            scale: scale,
+                            alignment: Alignment.topLeft,
+                            child: SizedBox(
+                              width: width,
+                              height: height,
+                              child: child,
+                            ),
+                          ),
                         ),
-                      ),
+                        if (_showDebugNav && kDebugMode)
+                          Positioned(
+                            right: 12,
+                            bottom: 12,
+                            child: _DebugNav(
+                              screenCode: screenCode,
+                              previousRoute: previousRoute,
+                              nextRoute: nextRoute,
+                            ),
+                          ),
+                      ],
                     ),
-                    if (_showDebugNav && kDebugMode)
-                      Positioned(
-                        right: 12,
-                        bottom: 12,
-                        child: _DebugNav(
-                          screenCode: screenCode,
-                          previousRoute: previousRoute,
-                          nextRoute: nextRoute,
-                        ),
-                      ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -175,7 +183,7 @@ class FigmaBottomNav extends StatelessWidget {
                 label: 'Community',
                 icon: Icons.groups_rounded,
                 isActive: activeTab == 'community',
-                targetRoute: '/s79_forum',
+                targetRoute: '/s79_community_forum',
               ),
               _NavItem(
                 id: 'profile',
