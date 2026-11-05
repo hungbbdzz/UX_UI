@@ -20,7 +20,7 @@ import urllib.request
 import urllib.error
 from config import FIGMA_ACCESS_TOKEN, FIGMA_FILE_KEY, OUTPUT_DIR, CACHE_DIR
 
-TARGET_PAGE_IDS = ["11:4", "21:7915"]
+TARGET_PAGE_IDS = ["11:4", "21:7915", "24:12935", "24:12934"]
 
 def http_get(url, headers):
     """Thực hiện HTTP GET bằng urllib chuẩn"""

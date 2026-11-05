@@ -12,8 +12,10 @@ import os
 import json
 import re
 
-output_dir = os.path.join(os.path.dirname(__file__), "output")
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+output_dir = os.path.join(root_dir, "output")
 proto_file = os.path.join(output_dir, "prototype_graph.json")
+flutter_screens_dir = os.path.join(root_dir, "frontend", "flutter", "lib", "screens")
 
 def clean_var_name(name):
     s = re.sub(r'[^A-Za-z0-9_]', '_', name)
@@ -28,17 +30,39 @@ with open(proto_file, "r", encoding="utf-8") as f:
 screens = proto_data.get("screens", [])
 flows = proto_data.get("flows", [])
 
+count_a = sum(1 for s in screens if "Part A" in s.get("page", ""))
+count_b = sum(1 for s in screens if "Part B" in s.get("page", ""))
+count_c = sum(1 for s in screens if "Part C" in s.get("page", ""))
+count_d = sum(1 for s in screens if "Part D" in s.get("page", ""))
+
 screens_data = []
 for sc in screens:
     pascal = sc["pascal_name"]
     safe_name = sc.get("safe_name") or clean_var_name(sc["name"])
-    flutter_file = os.path.join(output_dir, "flutter", "lib", "screens", f"{safe_name.lower()}.dart")
     rn_file = os.path.join(output_dir, "react_native", "screens", f"{pascal}Screen.tsx")
     
     flutter_code = ""
-    if os.path.exists(flutter_file):
-        with open(flutter_file, "r", encoding="utf-8") as f:
-            flutter_code = f.read()
+    m = re.match(r'^([ASas]\d+)', sc["name"])
+    code_prefix = m.group(1).lower() if m else None
+    
+    if os.path.exists(flutter_screens_dir):
+        if code_prefix:
+            for fn in os.listdir(flutter_screens_dir):
+                if fn.lower().startswith(code_prefix + "_") and fn.endswith(".dart"):
+                    with open(os.path.join(flutter_screens_dir, fn), "r", encoding="utf-8") as f:
+                        flutter_code = f.read()
+                    break
+        if not flutter_code:
+            safe_fn = os.path.join(flutter_screens_dir, f"{safe_name.lower()}.dart")
+            if os.path.exists(safe_fn):
+                with open(safe_fn, "r", encoding="utf-8") as f:
+                    flutter_code = f.read()
+
+    if not flutter_code:
+        out_flutter_file = os.path.join(output_dir, "flutter", "lib", "screens", f"{safe_name.lower()}.dart")
+        if os.path.exists(out_flutter_file):
+            with open(out_flutter_file, "r", encoding="utf-8") as f:
+                flutter_code = f.read()
             
     rn_code = ""
     if os.path.exists(rn_file):
@@ -222,7 +246,7 @@ html_content = f"""<!DOCTYPE html>
   <div class="flex-1 flex overflow-hidden">
     
     <!-- LEFT SIDEBAR: Screen list -->
-    <aside class="w-76 bg-panelbg/70 border-r border-slate-700/60 flex flex-col shrink-0">
+    <aside class="w-84 bg-panelbg/70 border-r border-slate-700/60 flex flex-col shrink-0">
       <!-- Search & Filter -->
       <div class="p-3 border-b border-slate-700/60">
         <div class="relative">
@@ -235,10 +259,12 @@ html_content = f"""<!DOCTYPE html>
             class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-primary"
           />
         </div>
-        <div class="flex gap-1.5 mt-2">
-          <button onclick="setTab('all')" id="tab-all" class="flex-1 py-1 text-[11px] font-semibold rounded bg-primary text-white">Tất cả ({len(screens)})</button>
-          <button onclick="setTab('part_a')" id="tab-part_a" class="flex-1 py-1 text-[11px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700">Part A (27)</button>
-          <button onclick="setTab('part_b')" id="tab-part_b" class="flex-1 py-1 text-[11px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700">Part B (23)</button>
+        <div class="grid grid-cols-5 gap-1 mt-2">
+          <button onclick="setTab('all')" id="tab-all" class="py-1 text-[10px] font-semibold rounded bg-primary text-white truncate" title="Tất cả ({len(screens)})">Tất cả ({len(screens)})</button>
+          <button onclick="setTab('part_a')" id="tab-part_a" class="py-1 text-[10px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700 truncate" title="Part A ({count_a})">Part A ({count_a})</button>
+          <button onclick="setTab('part_b')" id="tab-part_b" class="py-1 text-[10px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700 truncate" title="Part B ({count_b})">Part B ({count_b})</button>
+          <button onclick="setTab('part_c')" id="tab-part_c" class="py-1 text-[10px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700 truncate" title="Part C ({count_c})">Part C ({count_c})</button>
+          <button onclick="setTab('part_d')" id="tab-part_d" class="py-1 text-[10px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700 truncate" title="Part D ({count_d})">Part D ({count_d})</button>
         </div>
       </div>
 
@@ -289,15 +315,26 @@ html_content = f"""<!DOCTYPE html>
         <!-- Phone Screen Inside Viewport Frame (EXACTLY 390px WIDE x 760px HIGH) -->
         <div id="phone-screen-frame" class="relative w-[390px] h-[760px] bg-white rounded-[42px] overflow-hidden flex flex-col select-none ring-1 ring-black/40 shadow-inner">
           
-          <!-- IPHONE 13 PRO COMPACT NOTCH (20% Smaller - Exact Apple Proportion) -->
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[124px] h-[23px] bg-[#000000] rounded-b-[15px] z-50 flex items-center justify-center gap-2.5 px-3 pointer-events-none select-none shadow-sm">
-            <!-- Micro Speaker Grill -->
-            <div class="w-10 h-[3px] bg-[#1a1f2c] rounded-full"></div>
-            <!-- Front Camera & Face ID Sensor -->
-            <div class="w-2.5 h-2.5 bg-[#090b10] rounded-full ring-1 ring-[#1b202c] flex items-center justify-center">
-              <div class="w-1 h-1 bg-[#1e3a8a]/70 rounded-full"></div>
+          <!-- IPHONE 13 PRO / 14 STATUS BAR (Cố định ở đỉnh, bảo vệ Safe Area - Không bị đè khi cuộn) -->
+          <header id="phone-status-bar" class="w-[390px] h-[40px] shrink-0 bg-[#F9F9FF] border-b border-slate-200/50 flex items-center justify-between px-6 relative z-50 select-none shadow-[0_1px_3px_rgba(0,0,0,0.03)] transition-colors duration-200">
+            <!-- Left: Time 9:41 -->
+            <span id="status-time" class="text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1">9:41</span>
+
+            <!-- Center Notch Space -->
+            <div class="w-[124px] h-[23px] bg-[#000000] rounded-b-[15px] absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2.5 px-3 pointer-events-none shadow-sm">
+              <div class="w-[38px] h-[3.5px] bg-[#1a1d24] rounded-full ring-1 ring-white/10"></div>
+              <div class="w-[7px] h-[7px] bg-[#0d1017] rounded-full ring-1 ring-[#1f2638] flex items-center justify-center">
+                <div class="w-[3px] h-[3px] bg-[#0b1b3a] rounded-full"></div>
+              </div>
             </div>
-          </div>
+
+            <!-- Right: Status Icons (Cellular, Wifi, Battery) -->
+            <div id="status-icons" class="flex items-center gap-1.5 text-slate-800 pr-1">
+              <span class="material-symbols-outlined text-[13px] leading-none">signal_cellular_alt</span>
+              <span class="material-symbols-outlined text-[13px] leading-none">wifi</span>
+              <span class="material-symbols-outlined text-[15px] leading-none">battery_full</span>
+            </div>
+          </header>
 
           <!-- Scrollable Screen Content (Takes remaining height above pinned nav) -->
           <div id="phone-screen-viewport" class="relative w-[390px] flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col select-none">
@@ -523,12 +560,13 @@ html_content = f"""<!DOCTYPE html>
 
     function setTab(tab) {{
       activeTab = tab;
-      ['all', 'part_a', 'part_b'].forEach(t => {{
+      ['all', 'part_a', 'part_b', 'part_c', 'part_d'].forEach(t => {{
         const btn = document.getElementById('tab-' + t);
+        if (!btn) return;
         if (t === tab) {{
-          btn.className = "flex-1 py-1 text-[11px] font-semibold rounded bg-primary text-white";
+          btn.className = "py-1 text-[10px] font-semibold rounded bg-primary text-white truncate";
         }} else {{
-          btn.className = "flex-1 py-1 text-[11px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700";
+          btn.className = "py-1 text-[10px] font-semibold rounded bg-slate-800 text-slate-300 hover:bg-slate-700 truncate";
         }}
       }});
       renderSidebar();
@@ -545,8 +583,14 @@ html_content = f"""<!DOCTYPE html>
 
       SCREENS.forEach((sc, idx) => {{
         const isPartA = sc.page.includes('Part A');
+        const isPartB = sc.page.includes('Part B');
+        const isPartC = sc.page.includes('Part C');
+        const isPartD = sc.page.includes('Part D');
+
         if (activeTab === 'part_a' && !isPartA) return;
-        if (activeTab === 'part_b' && isPartA) return;
+        if (activeTab === 'part_b' && !isPartB) return;
+        if (activeTab === 'part_c' && !isPartC) return;
+        if (activeTab === 'part_d' && !isPartD) return;
 
         if (query && !sc.name.toLowerCase().includes(query) && !sc.pascal_name.toLowerCase().includes(query)) {{
           return;
@@ -614,18 +658,36 @@ html_content = f"""<!DOCTYPE html>
         'S38ReadingLesson', 'S39XemSlide', 'S40TimestampedVideoNotes',
         'S41DictionaryLookup', 'S42ManageOfflineDownloads', 'S43LessonPlaylist',
         'S45ChooseCohortSchedule', 'S46MyCourses', 'S47CourseProgressDetails',
-        'S48NextCourseRecommendations'
+        'S48NextCourseRecommendations',
+        'S49MultipleChoiceQuiz', 'S50TrueFalseSwipeCards', 'S51FillInTheBlanks',
+        'S52ReorderSequence', 'S53MatchingPairs', 'S54ListeningComprehension',
+        'S55PronunciationRecording', 'S56EssayWriting', 'S57CodingExercise',
+        'S58Flashcard', 'S59SpacedRepetitionSchedule', 'S60MyVocabulary',
+        'S61TimedExam', 'S62ReviewAnswers', 'S63ExamResults', 'S64WeaknessAnalysis',
+        'S65SubmitAssignment', 'S66AssignmentQueue', 'S67GradesAndFeedback',
+        'S68Gradebook', 'S69Certificates', 'S70Leaderboard', 'S711v1Challenge', 'S72ReviewMiniGame'
+      ]);
+      const communityScreens = new Set([
+        'S73LiveClassWaitingRoom', 'S74VideoClassroom', 'S75SharedWhiteboard',
+        'S76InClassQA', 'S77StudySchedule', 'S78SessionDetails', 'S79Forum',
+        'S80DiscussionThread', 'S81CreatePost', 'S82StudyGroups', 'S83GroupChat',
+        'S84FindStudyBuddies', 'S85BookA1On1Mentor', 'S86LearnerProfile',
+        'S87Notifications', 'S88Inbox'
       ]);
       const profileScreens = new Set([
         'S18PersonalProfile', 'S19EditProfile', 'S22LearningSettings',
-        'S23StudyReminders', 'S24DisplayAndAccessibility'
+        'S23StudyReminders', 'S24DisplayAndAccessibility',
+        'S89CourseCheckout', 'S90PaymentMethods', 'S91PremiumPlan',
+        'S92PromoCodes', 'S93TransactionHistory', 'S94Invoice',
+        'S95InviteFriends', 'S96HelpCenter'
       ]);
 
       if (homeScreens.has(pascal)) return 'home';
       if (exploreScreens.has(pascal)) return 'explore';
       if (coursesScreens.has(pascal)) return 'courses';
+      if (communityScreens.has(pascal)) return 'community';
       if (profileScreens.has(pascal)) return 'profile';
-      return 'explore';
+      return 'courses';
     }}
 
     function renderPinnedBottomNav(sc) {{
@@ -638,7 +700,7 @@ html_content = f"""<!DOCTYPE html>
         {{ id: 'home', label: 'Home', icon: 'home', target: 'S10LearnerHome', isInternal: true }},
         {{ id: 'explore', label: 'Explore', icon: 'explore', target: 'S25Explore', isInternal: true }},
         {{ id: 'courses', label: 'Courses', icon: 'menu_book', target: 'S46MyCourses', isInternal: true }},
-        {{ id: 'community', label: 'Community', icon: 'groups', target: 'S79', isInternal: false, toastMsg: 'Chuyển tiếp sang: S79 – Diễn đàn cộng đồng & Thảo luận (Figma Part D)' }},
+        {{ id: 'community', label: 'Community', icon: 'groups', target: 'S79Forum', isInternal: true }},
         {{ id: 'profile', label: 'Profile', icon: 'person', target: 'S18PersonalProfile', isInternal: true }}
       ];
 
@@ -739,6 +801,24 @@ html_content = f"""<!DOCTYPE html>
       // Update Right Sidebar Interactions
       renderInteractions(sc);
       renderSidebar();
+
+      // Đồng bộ màu thanh Status Bar theo nền màn hình
+      const statusBar = document.getElementById('phone-status-bar');
+      const statusTime = document.getElementById('status-time');
+      const statusIcons = document.getElementById('status-icons');
+      if (statusBar && statusTime && statusIcons) {{
+        if (sc.pascal_name === 'S01Splash') {{
+          statusBar.style.backgroundColor = '#3626bf';
+          statusBar.style.borderColor = 'rgba(255,255,255,0.12)';
+          statusTime.className = "text-[12px] font-semibold text-white tracking-tight font-sans pl-1";
+          statusIcons.className = "flex items-center gap-1.5 text-white pr-1";
+        }} else {{
+          statusBar.style.backgroundColor = '#F9F9FF';
+          statusBar.style.borderColor = 'rgba(226,232,248,0.7)';
+          statusTime.className = "text-[12px] font-semibold text-slate-800 tracking-tight font-sans pl-1";
+          statusIcons.className = "flex items-center gap-1.5 text-slate-800 pr-1";
+        }}
+      }}
     }}
 
     function renderHotspots(sc, container, hasNav, rawHeight) {{
@@ -1179,5 +1259,9 @@ html_content = f"""<!DOCTYPE html>
 index_path = os.path.join(output_dir, "index.html")
 with open(index_path, "w", encoding="utf-8") as f:
     f.write(html_content)
+print(f"[+] Đã tạo xong Trình mô phỏng Web Prototype tại: {index_path}")
 
-print(f"[+] Đã tạo xong Trình mô phỏng Web Prototype V2.1 tại: {index_path}")
+web_viewer_index = os.path.join(root_dir, "frontend", "web_viewer", "index.html")
+with open(web_viewer_index, "w", encoding="utf-8") as f:
+    f.write(html_content)
+print(f"[+] Đã đồng bộ sang frontend/web_viewer/index.html: {web_viewer_index}")
