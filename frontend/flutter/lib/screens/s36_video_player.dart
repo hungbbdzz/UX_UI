@@ -1,331 +1,229 @@
 import 'package:flutter/material.dart';
+import '../widgets/figma_screen.dart';
 
-/// Màn hình: S36 – Video player
-/// Figma Frame ID: 21:10957 | Nhóm: Part B · Member 2 — Course discovery and learning content (S25–S48)
+/// Màn hình: S36 – Video player (Figma UI chuẩn xác cho người dùng)
+/// Mã: S36 | Kích thước thiết kế: 390 x 1320 px
 class S36VideoPlayerScreen extends StatelessWidget {
   const S36VideoPlayerScreen({super.key});
 
+  static const routeName = '/s36_video_player';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F9FF),
-      appBar: AppBar(
-        title: Text(
-          'S36 – Video player',
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Color(0xFF151C27)),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0.5,
-        centerTitle: true,
-        leading: Navigator.canPop(context)
-            ? IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color(0xFF151C27)),
-                onPressed: () => Navigator.pop(context),
-              )
-            : null,
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFE2E8F8)),
-                boxShadow: const [
-                  BoxShadow(color: Color(0x06000000), blurRadius: 10, offset: Offset(0, 4))
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF2A14B4).withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          'Part B · Member 2',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF2A14B4)),
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        '390 x 1320 px',
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF777586), fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'S36 – Video player',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF151C27)),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Trích xuất tự động từ Figma REST API với đầy đủ Prototype links chính xác.',
-                    style: TextStyle(fontSize: 13, color: Color(0xFF464554), height: 1.4),
-                  ),
-                ],
+    return FigmaScreen(
+      width: 390,
+      height: 1320.00,
+      background: const Color(0xFFF9F9FF),
+      screenCode: 'S36',
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Image.asset(
+            'assets/images/S36VideoPlayer.png',
+            width: 390.0,
+            height: 1320.0,
+            fit: BoxFit.fill,
+            filterQuality: FilterQuality.high,
+          ),
+          // Hotspot: Button - Go back:margin -> GoBack
+          Positioned(
+            left: 16.0,
+            top: 10.0,
+            width: 38.0,
+            height: 44.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  if (Navigator.canPop(context)) Navigator.pop(context);
+                },
               ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const Icon(Icons.touch_app_rounded, size: 18, color: Color(0xFF2A14B4)),
-                const SizedBox(width: 8),
-                Text(
-                  'Các liên kết Prototype từ Figma (11):',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF2A14B4)),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Tương tác Prototype: ON_CLICK -> Quay lại màn hình trước
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF464554),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_rounded, size: 18),
-                label: Text(
-                  'Button - Go back:margin → Quay lại màn hình trước',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Button - Look up definition for lambda function -> S41DictionaryLookup
+          Positioned(
+            left: 189.1,
+            top: 417.4,
+            width: 143.5,
+            height: 24.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s41_dictionary_lookup');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S41 – Dictionary lookup
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s41dictionarylookup'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Button - Look up definition for lambd... → S41 – Dictionary lookup',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: 1. Take Note Button -> S40TimestampedVideoNotes
+          Positioned(
+            left: 16.0,
+            top: 524.0,
+            width: 70.1,
+            height: 96.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s40_timestamped_video_notes');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S40 – Timestamped video notes
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s40timestampedvideonotes'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  '1. Take Note Button → S40 – Timestamped video notes',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: 2. Playlist / Syllabus Drawer Button -> S43LessonPlaylist
+          Positioned(
+            left: 94.1,
+            top: 524.0,
+            width: 83.5,
+            height: 96.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s43_lesson_playlist');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S43 – Lesson playlist
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s43lessonplaylist'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  '2. Playlist / Syllabus Drawer Button → S43 – Lesson playlist',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: 3. Offline Download Button -> S42ManageOfflineDownloads
+          Positioned(
+            left: 185.6,
+            top: 524.0,
+            width: 83.5,
+            height: 96.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s42_manage_offline_downloads');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S42 – Manage offline downloads
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s42manageofflinedownloads'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  '3. Offline Download Button → S42 – Manage offline downloads',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Button -> S40TimestampedVideoNotes
+          Positioned(
+            left: 20.0,
+            top: 768.0,
+            width: 84.5,
+            height: 32.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s40_timestamped_video_notes');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S40 – Timestamped video notes
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s40timestampedvideonotes'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Button → S40 – Timestamped video notes',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Button -> S80DiscussionThread
+          Positioned(
+            left: 108.5,
+            top: 768.0,
+            width: 84.5,
+            height: 32.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s80_discussion_thread');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S80 – Discussion thread
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S80 – Discussion thread (Part D · Member 4 — Live classes, community and payments (S73–S96))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Button → S80 – Discussion thread',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Tab Dynamic Content Slot → Notes Content (Default active) -> S40TimestampedVideoNotes
+          Positioned(
+            left: 16.0,
+            top: 820.0,
+            width: 358.0,
+            height: 296.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s40_timestamped_video_notes');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S40 – Timestamped video notes
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s40timestampedvideonotes'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Tab Dynamic Content Slot → Notes Cont... → S40 – Timestamped video notes',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Tactile Up Next Card -> S49MultipleChoiceQuiz
+          Positioned(
+            left: 16.0,
+            top: 1166.0,
+            width: 358.0,
+            height: 86.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s49_multiple_choice_quiz');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S49 – Multiple-choice quiz
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S49 – Multiple-choice quiz (Part C · Member 3 — Practice, assessments, grades and challenges (S49–S72))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Link - Tactile Up Next Card → S49 – Multiple-choice quiz',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Next lesson in the syllabus -> S43LessonPlaylist
+          Positioned(
+            left: 60.0,
+            top: 353.4,
+            width: 159.0,
+            height: 18.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s43_lesson_playlist');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S43 – Lesson playlist
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s43lessonplaylist'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Next lesson in the syllabus → S43 – Lesson playlist',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link -> S49MultipleChoiceQuiz
+          Positioned(
+            left: 272.0,
+            top: 325.4,
+            width: 102.0,
+            height: 36.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s49_multiple_choice_quiz');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S49 – Multiple-choice quiz
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S49 – Multiple-choice quiz (Part C · Member 3 — Practice, assessments, grades and challenges (S49–S72))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Link → S49 – Multiple-choice quiz',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

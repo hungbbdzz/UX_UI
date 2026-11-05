@@ -1,715 +1,553 @@
 import 'package:flutter/material.dart';
+import '../widgets/figma_screen.dart';
 
-/// Màn hình: S10 – Learner home
-/// Figma Frame ID: 11:1551 | Nhóm: Part A · Member 1 — Onboarding, personalization and progress (S01–S24)
+/// Màn hình: S10 – Learner home (Figma UI chuẩn xác cho người dùng)
+/// Mã: S10 | Kích thước thiết kế: 390 x 1398 px
 class S10LearnerHomeScreen extends StatelessWidget {
   const S10LearnerHomeScreen({super.key});
 
+  static const routeName = '/s10_learner_home';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F9FF),
-      appBar: AppBar(
-        title: Text(
-          'S10 – Learner home',
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Color(0xFF151C27)),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0.5,
-        centerTitle: true,
-        leading: Navigator.canPop(context)
-            ? IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color(0xFF151C27)),
-                onPressed: () => Navigator.pop(context),
-              )
-            : null,
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFE2E8F8)),
-                boxShadow: const [
-                  BoxShadow(color: Color(0x06000000), blurRadius: 10, offset: Offset(0, 4))
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF2A14B4).withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          'Part A · Member 1',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF2A14B4)),
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        '390 x 1398 px',
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF777586), fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'S10 – Learner home',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF151C27)),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Trích xuất tự động từ Figma REST API với đầy đủ Prototype links chính xác.',
-                    style: TextStyle(fontSize: 13, color: Color(0xFF464554), height: 1.4),
-                  ),
-                ],
+    return FigmaScreen(
+      width: 390,
+      height: 1398.00,
+      background: const Color(0xFFF9F9FF),
+      screenCode: 'S10',
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Image.asset(
+            'assets/images/S10LearnerHome.png',
+            width: 390.0,
+            height: 1398.0,
+            fit: BoxFit.fill,
+            filterQuality: FilterQuality.high,
+          ),
+          // Hotspot: Button - Notifications -> S87Notifications
+          Positioned(
+            left: 294.0,
+            top: 10.0,
+            width: 44.0,
+            height: 44.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s87_notifications');
+                },
               ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const Icon(Icons.touch_app_rounded, size: 18, color: Color(0xFF2A14B4)),
-                const SizedBox(width: 8),
-                Text(
-                  'Các liên kết Prototype từ Figma (29):',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF2A14B4)),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Tương tác Prototype: ON_CLICK -> S87 – Notifications
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S87 – Notifications (Part D · Member 4 — Live classes, community and payments (S73–S96))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Button - Notifications → S87 – Notifications',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Background -> S18PersonalProfile
+          Positioned(
+            left: 342.0,
+            top: 16.0,
+            width: 32.0,
+            height: 32.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s18_personal_profile');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S18 – Personal profile
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s18personalprofile'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Background → S18 – Personal profile',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Streak details -> S12StudyStreak
+          Positioned(
+            left: 135.7,
+            top: 94.0,
+            width: 82.0,
+            height: 24.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s12_study_streak');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S12 – Study streak
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s12studystreak'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Streak details → S12 – Study streak',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - XP details -> S16LevelAndXp
+          Positioned(
+            left: 223.7,
+            top: 94.0,
+            width: 74.3,
+            height: 24.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s16_level_and_xp');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S16 – Level and XP
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s16levelandxp'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - XP details → S16 – Level and XP',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Messages -> S88Inbox
+          Positioned(
+            left: 304.0,
+            top: 90.0,
+            width: 32.0,
+            height: 32.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s88_inbox');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S88 – Inbox
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S88 – Inbox (Part D · Member 4 — Live classes, community and payments (S73–S96))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Link - Messages → S88 – Inbox',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Notifications -> S87Notifications
+          Positioned(
+            left: 342.0,
+            top: 90.0,
+            width: 32.0,
+            height: 32.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s87_notifications');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S87 – Notifications
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S87 – Notifications (Part D · Member 4 — Live classes, community and payments (S73–S96))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Link - Notifications → S87 – Notifications',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Search Bar (S27) -> S27Search
+          Positioned(
+            left: 16.0,
+            top: 136.0,
+            width: 358.0,
+            height: 44.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s27_search');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S27 – Search
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s27search'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Search Bar (S27) → S27 – Search',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link -> S30CourseDetails
+          Positioned(
+            left: 32.0,
+            top: 232.0,
+            width: 326.0,
+            height: 22.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s30_course_details');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S30 – Course details
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s30coursedetails'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link → S30 – Course details',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Primary Action CTA Button -> S36VideoPlayer
+          Positioned(
+            left: 32.0,
+            top: 324.0,
+            width: 326.0,
+            height: 48.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s36_video_player');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S36 – Video player
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s36videoplayer'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Primary Action CTA Button → S36 – Video player',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link → View all (5 tasks) → -> S11TodaySStudyPlan
+          Positioned(
+            left: 246.4,
+            top: 428.0,
+            width: 111.6,
+            height: 14.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s11_today_s_study_plan');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S11 – Today's study plan
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s11todaysstudyplan'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link → View all (5 tasks) → → S11 – Today\'s study plan',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Text -> S49MultipleChoiceQuiz
+          Positioned(
+            left: 70.0,
+            top: 564.0,
+            width: 66.2,
+            height: 20.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s49_multiple_choice_quiz');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S49 – Multiple-choice quiz
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S49 – Multiple-choice quiz (Part C · Member 3 — Practice, assessments, grades and challenges (S49–S72))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Text → S49 – Multiple-choice quiz',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Study schedule -> S77StudySchedule
+          Positioned(
+            left: 32.0,
+            top: 614.0,
+            width: 145.0,
+            height: 44.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s77_study_schedule');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S77 – Study schedule
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S77 – Study schedule (Part D · Member 4 — Live classes, community and payments (S73–S96))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'Link - Study schedule → S77 – Study schedule',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Study schedule → -> S11TodaySStudyPlan
+          Positioned(
+            left: 32.0,
+            top: 629.0,
+            width: 102.0,
+            height: 14.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s11_today_s_study_plan');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S11 – Today's study plan
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s11todaysstudyplan'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Study schedule → → S11 – Today\'s study plan',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Weekly goals -> S13WeeklyGoals
+          Positioned(
+            left: 201.0,
+            top: 614.0,
+            width: 145.0,
+            height: 44.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s13_weekly_goals');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S13 – Weekly goals
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s13weeklygoals'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Weekly goals → S13 – Weekly goals',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Weekly goals → -> S11TodaySStudyPlan
+          Positioned(
+            left: 201.0,
+            top: 629.0,
+            width: 89.0,
+            height: 14.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s11_today_s_study_plan');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S11 – Today's study plan
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s11todaysstudyplan'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Weekly goals → → S11 – Today\'s study plan',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link -> S17DailyQuests
+          Positioned(
+            left: 221.0,
+            top: 761.0,
+            width: 125.0,
+            height: 26.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s17_daily_quests');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S17 – Daily quests
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s17dailyquests'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link → S17 – Daily quests',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link -> S26CourseCategories
+          Positioned(
+            left: 314.9,
+            top: 936.0,
+            width: 59.1,
+            height: 14.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s26_course_categories');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S26 – Course categories
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s26coursecategories'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link → S26 – Course categories',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Pill: Python (Selected) -> S26CourseCategories
+          Positioned(
+            left: 16.0,
+            top: 958.0,
+            width: 95.6,
+            height: 36.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s26_course_categories');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S26 – Course categories
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s26coursecategories'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Pill: Python (Selected) → S26 – Course categories',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Pill: English A2 -> S26CourseCategories
+          Positioned(
+            left: 122.2,
+            top: 958.0,
+            width: 117.3,
+            height: 36.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s26_course_categories');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S26 – Course categories
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s26coursecategories'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Pill: English A2 → S26 – Course categories',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Pill: UI/UX -> S26CourseCategories
+          Positioned(
+            left: 248.8,
+            top: 958.0,
+            width: 86.8,
+            height: 36.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s26_course_categories');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S26 – Course categories
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s26coursecategories'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Pill: UI/UX → S26 – Course categories',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Pill: Data Science -> S26CourseCategories
+          Positioned(
+            left: 346.2,
+            top: 958.0,
+            width: 137.9,
+            height: 36.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s26_course_categories');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S26 – Course categories
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s26coursecategories'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Pill: Data Science → S26 – Course categories',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Pill: Logic -> S26CourseCategories
+          Positioned(
+            left: 493.4,
+            top: 958.0,
+            width: 84.5,
+            height: 36.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s26_course_categories');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S26 – Course categories
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s26coursecategories'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Pill: Logic → S26 – Course categories',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link -> S48NextCourseRecommendations
+          Positioned(
+            left: 320.7,
+            top: 1029.0,
+            width: 53.3,
+            height: 14.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s48_next_course_recommendations');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S48 – Next course recommendations
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s48nextcourserecommendations'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link → S48 – Next course recommendations',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Recommended Course 1 -> S30CourseDetails
+          Positioned(
+            left: 16.0,
+            top: 1062.0,
+            width: 358.0,
+            height: 114.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s30_course_details');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S30 – Course details
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s30coursedetails'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Recommended Course 1 → S30 – Course details',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: Link - Recommended Course 2 -> S30CourseDetails
+          Positioned(
+            left: 16.0,
+            top: 1192.0,
+            width: 358.0,
+            height: 118.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s30_course_details');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S30 – Course details
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s30coursedetails'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'Link - Recommended Course 2 → S30 – Course details',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: GO:S25 / Explore -> S25Explore
+          Positioned(
+            left: 78.6,
+            top: 1341.0,
+            width: 77.6,
+            height: 52.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s25_explore');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S25 – Explore
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s25explore'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'GO:S25 / Explore → S25 – Explore',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: GO:S46 / Courses -> S46MyCourses
+          Positioned(
+            left: 156.2,
+            top: 1341.0,
+            width: 77.6,
+            height: 52.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s46_my_courses');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S46 – My courses
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s46mycourses'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'GO:S46 / Courses → S46 – My courses',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: GO:S79 / Community -> S79Forum
+          Positioned(
+            left: 233.8,
+            top: 1341.0,
+            width: 77.6,
+            height: 52.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s79_forum');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S79 – Forum
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A14B4),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Liên kết chuyển tiếp sang S79 – Forum (Part D · Member 4 — Live classes, community and payments (S73–S96))')),
-                ),
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: Text(
-                  'GO:S79 / Community → S79 – Forum',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
+          ),
+          // Hotspot: GO:S18 / Profile -> S18PersonalProfile
+          Positioned(
+            left: 311.4,
+            top: 1341.0,
+            width: 77.6,
+            height: 52.0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                splashColor: const Color(0x33FD761A),
+                highlightColor: const Color(0x1AFD761A),
+                onTap: () {
+                  Navigator.pushNamed(context, '/s18_personal_profile');
+                },
               ),
             ),
-            // Tương tác Prototype: ON_CLICK -> S18 – Personal profile
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFD761A),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/s18personalprofile'),
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
-                label: Text(
-                  'GO:S18 / Profile → S18 – Personal profile',
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
